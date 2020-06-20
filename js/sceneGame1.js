@@ -39,8 +39,9 @@ class SceneGame extends Phaser.Scene {
             repeat: -1
         });
 
-        this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1').play("walk")
-        this.pizzaMan.anims.pause();
+        // this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1').play("walk")
+        // this.pizzaMan.anims.pause();
+        this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1')
         this.pizzaMan.setFrictionAir(0.15);
         this.pizzaMan.setMass(30);
         this.pizzaMan.setFixedRotation();
@@ -48,6 +49,16 @@ class SceneGame extends Phaser.Scene {
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        this.input.keyboard.on("keyup_UP", () => {
+            this.pizzaMan.anims.restart();
+
+            this.pizzaMan.anims.stop("walk");
+        })
+
+        this.input.keyboard.on("keydown_UP", () => {
+            this.pizzaMan.anims.play("walk");
+        })
 
         
     }
@@ -66,14 +77,14 @@ class SceneGame extends Phaser.Scene {
 
         if (this.cursors.up.isDown)
         {
-            this.pizzaMan.anims.resume();
+        //     this.pizzaMan.anims.resume();
             this.pizzaMan.thrust(0.06)
         }
 
-        else{
+        // else{
 
-            this.pizzaMan.anims.pause();     
-        }
+        //     this.pizzaMan.anims.pause();     
+        // }
     }
 
 }
