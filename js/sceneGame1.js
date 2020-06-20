@@ -19,52 +19,61 @@ class SceneGame extends Phaser.Scene {
    
 }
 
-create ()
-{
-    this.anims.create({
-        key: 'walk',
-        frames: [
-            { key: 'pizzaMan1' },
-            { key: 'pizzaMan2' },
-            { key: 'pizzaMan3' },
-            { key: 'pizzaMan4' },
-            { key: 'pizzaMan5' },
-            { key: 'pizzaMan6' },
-            { key: 'pizzaMan7' },
-            { key: 'pizzaMan8' },
-
-
-        ],
-        frameRate: 23,
-        repeat: -1
-    });
-
-    this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1').play("walk")
-    this.pizzaMan.setFrictionAir(0.15);
-    this.pizzaMan.setMass(30);
-    this.pizzaMan.setFixedRotation();
-    this.matter.world.setBounds(0, 0, 800, 600);
-
-
-    this.cursors = this.input.keyboard.createCursorKeys();
-
-}
-
-update(){
-
-    if (this.cursors.left.isDown)
+    create ()
     {
-        this.pizzaMan.setAngularVelocity(-0.1);
-    }
-    else if (this.cursors.right.isDown)
-    {
-        this.pizzaMan.setAngularVelocity(0.1);
+        this.anims.create({
+            key: 'walk',
+            frames: [
+                { key: 'pizzaMan1' },
+                { key: 'pizzaMan2' },
+                { key: 'pizzaMan3' },
+                { key: 'pizzaMan4' },
+                { key: 'pizzaMan5' },
+                { key: 'pizzaMan6' },
+                { key: 'pizzaMan7' },
+                { key: 'pizzaMan8' },
+
+
+            ],
+            frameRate: 23,
+            repeat: -1
+        });
+
+        this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1').play("walk")
+        this.pizzaMan.anims.pause();
+        this.pizzaMan.setFrictionAir(0.15);
+        this.pizzaMan.setMass(30);
+        this.pizzaMan.setFixedRotation();
+        this.matter.world.setBounds(0, 0, 800, 600);
+
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        
     }
 
-    if (this.cursors.up.isDown)
-    {
-        this.pizzaMan.thrust(0.06)
+    update(){
+
+        if (this.cursors.left.isDown)
+        {
+            this.pizzaMan.setAngularVelocity(-0.1);
+        }
+        
+        else if (this.cursors.right.isDown)
+        {
+            this.pizzaMan.setAngularVelocity(0.1);
+        }
+
+        if (this.cursors.up.isDown)
+        {
+            this.pizzaMan.anims.resume();
+            this.pizzaMan.thrust(0.06)
+        }
+
+        else{
+
+            this.pizzaMan.anims.pause();     
+        }
     }
-}
 
 }
