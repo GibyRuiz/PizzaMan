@@ -16,13 +16,21 @@ class SceneGame extends Phaser.Scene {
     this.load.image('pizzaMan6', 'Sprite-6.png');
     this.load.image('pizzaMan7', 'Sprite-7.png');
     this.load.image('pizzaMan8', 'Sprite-8.png');   
+
+    this.load.image('rata1', 'Rata sprite 1.png');   
+    this.load.image('rata2', 'Rata sprite 2.png');   
+    this.load.image('rata3', 'Rata sprite 3.png');   
+    this.load.image('rata4', 'Rata sprite 4.png');   
+    this.load.image('rata5', 'Rata sprite 5.png');   
+    this.load.image('rata6', 'Rata sprite 6.png');   
+
    
 }
 
     create ()
     {
         this.anims.create({
-            key: 'walk',
+            key: 'pizzaManWalk',
             frames: [
                 { key: 'pizzaMan1' },
                 { key: 'pizzaMan2' },
@@ -39,8 +47,26 @@ class SceneGame extends Phaser.Scene {
             repeat: -1
         });
 
-        // this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1').play("walk")
-        // this.pizzaMan.anims.pause();
+        this.anims.create({
+            key: 'rataWalk',
+            frames: [
+                { key: 'rata1' },
+                { key: 'rata2' },
+                { key: 'rata3' },
+                { key: 'rata4' },
+                { key: 'rata5' },
+                { key: 'rata6' },
+                
+
+
+            ],
+            frameRate: 15,
+            repeat: -1
+        });
+
+        this.rata = this.add.sprite(200, 300, 'rata1').play("rataWalk")
+
+        
         this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1')
         this.pizzaMan.setFrictionAir(0.15);
         this.pizzaMan.setMass(30);
@@ -53,11 +79,11 @@ class SceneGame extends Phaser.Scene {
         this.input.keyboard.on("keyup_UP", () => {
             this.pizzaMan.anims.restart();
 
-            this.pizzaMan.anims.stop("walk");
+            this.pizzaMan.anims.stop("pizzaManWalk");
         })
 
         this.input.keyboard.on("keydown_UP", () => {
-            this.pizzaMan.anims.play("walk");
+            this.pizzaMan.anims.play("pizzaManWalk");
         })
 
         
@@ -77,14 +103,9 @@ class SceneGame extends Phaser.Scene {
 
         if (this.cursors.up.isDown)
         {
-        //     this.pizzaMan.anims.resume();
             this.pizzaMan.thrust(0.06)
         }
 
-        // else{
-
-        //     this.pizzaMan.anims.pause();     
-        // }
     }
 
 }
