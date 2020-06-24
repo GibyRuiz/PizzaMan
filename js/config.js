@@ -6,14 +6,16 @@ var config = {
     backgroundColor: "#B7B2F6",
     scene: [SceneGame],
     physics: {
-        default: 'matter',
-        matter: {
+        default: 'arcade',
+        arcade: {
+            debug: false,
             gravity: {
                 x: 0,
                 y: 0
             }
         }
     },
+
 };
 
 var game = new Phaser.Game(config);

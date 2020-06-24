@@ -24,7 +24,17 @@ class SceneGame extends Phaser.Scene {
     this.load.image('rata5', 'Rata sprite 5.png');   
     this.load.image('rata6', 'Rata sprite 6.png');   
 
-   
+    this.load.image('horno', 'horno1.png');   
+    this.load.image('hornoMesa', 'hornoymesa2.png');  
+    this.load.image('mesa1', 'mesa1.png');   
+    this.load.image('mesa2', 'mesa2.png');   
+    this.load.image('mesa3', 'mesa3.png');   
+    this.load.image('mesa4', 'mesa4.png');   
+    this.load.image('mesaGrande', 'mesaGrande.png');   
+    this.load.image('mesaMadera1', 'mesaMadera1.png');   
+    this.load.image('mesaMadera2', 'mesaMadera2.png');   
+    this.load.image('piso', 'pisotemporal.png');   
+
 }
 
     create ()
@@ -64,15 +74,84 @@ class SceneGame extends Phaser.Scene {
             repeat: -1
         });
 
-        this.rata = this.add.sprite(200, 300, 'rata1').play("rataWalk")
+        this.add.image(0, 0, "piso").setOrigin(0)
+        this.add.image(665, 0, "piso").setOrigin(0)
+
+
+        this.grupoCocina = this.physics.add.staticGroup();
+        this.grupoCocina.create(700, 50, 'mesa3');
+        this.grupoCocina.create(374, 60, 'mesa1');
+        this.grupoCocina.create(699, 550, 'mesa2');
+        this.grupoCocina.create(749, 152, 'mesa4');
+        this.grupoCocina.create(320, 328, 'mesaGrande');
+        this.grupoCocina.create(50, 100, 'mesaMadera1');
+        this.grupoCocina.create(50, 550, 'mesaMadera2');
+        this.grupoCocina.create(750, 338, 'horno');
+        this.grupoCocina.create(340, 550, 'hornoMesa')
+
+
+        this.ratas = this.physics.add.group();
+
+        this.rata1 = this.ratas.create(450, 460, 'rata1').play("rataWalk")
+        this.rata2 = this.ratas.create(620, 460, 'rata1').play("rataWalk")
+        this.rata3 = this.ratas.create(200, 50, 'rata1').play("rataWalk")
+        this.rata4 = this.ratas.create(40, 480, 'rata1').play("rataWalk")
+        this.rata4.setSize(70, 30).angle = 90
+        this.rata5 = this.ratas.create(140, 180, 'rata1').play("rataWalk")
+        this.rata5.setSize(70, 30).angle = 90
+
+
+
+
+        this.tweens.add({
+            targets: this.rata1,
+            duration:2000,
+            y: 150,
+            repeat: -1,
+            yoyo: true,
+            ease: 'linear'
+        })
+
+        this.tweens.add({
+            targets: this.rata2,
+            duration:2000,
+            y: 150,
+            repeat: -1,
+            yoyo: true,
+            ease: 'linear',
+            delay: 1500
+        })
+
+        this.tweens.add({
+            targets: this.rata3,
+            duration:2000,
+            y: 470,
+            repeat: -1,
+            yoyo: true,
+            ease: 'linear'
+        })
+
+        this.tweens.add({
+            targets: this.rata4,
+            duration:3000,
+            x: 770,
+            repeat: -1,
+            yoyo: true,
+            ease: 'linear'
+        })
+
+        this.tweens.add({
+            targets: this.rata5,
+            duration:2000,
+            x: 670,
+            repeat: -1,
+            yoyo: true,
+            ease: 'linear'
+        })
 
         
-        this.pizzaMan = this.matter.add.sprite(100, 300, 'pizzaMan1')
-        this.pizzaMan.setFrictionAir(0.15);
-        this.pizzaMan.setMass(30);
-        this.pizzaMan.setFixedRotation();
-        this.matter.world.setBounds(0, 0, 800, 600);
-
+        this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
+        this.pizzaMan.setSize(50, 50)        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -85,25 +164,92 @@ class SceneGame extends Phaser.Scene {
         this.input.keyboard.on("keydown_UP", () => {
             this.pizzaMan.anims.play("pizzaManWalk");
         })
+        
 
         
+        this.physics.add.collider(this.pizzaMan, this.grupoCocina);
+
+        // COLISIONES:
+        // forma 1:
+        // this.physics.add.collider(sprite, [ grupo1, grupo2, ... ], function);
+
+        // forma 2:
+        // this.physics.add.overlap(sprite, grupo, function);
+
+        // GRUPOS:
+        // group.createMultiple({ key: ['imagen2', 'imagen1', ...]});
+        // Phaser.Actions.SetXY(grupo.getChildren(), origenX, origenY, stepX);
+        // Phaser.Actions.SetXY([group.getChildren()[0]], origenX, origenY, stepX);
+
+
+
     }
 
     update(){
 
+        this.pizzaMan.setVelocity(0)
+
         if (this.cursors.left.isDown)
         {
-            this.pizzaMan.setAngularVelocity(-0.1);
+            this.pizzaMan.angle -= 4
+            
         }
         
         else if (this.cursors.right.isDown)
         {
-            this.pizzaMan.setAngularVelocity(0.1);
+            this.pizzaMan.angle += 4
         }
 
         if (this.cursors.up.isDown)
         {
-            this.pizzaMan.thrust(0.06)
+            this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
+
+        }
+
+        if(this.rata1.y == 150){
+            this.rata1.flipY = true;
+        }
+
+        else if(this.rata1.y == 460){
+            this.rata1.flipY = false;
+
+        }
+
+        if(this.rata2.y == 150){
+            this.rata2.flipY = true;
+        }
+
+        else if(this.rata2.y == 460){
+            this.rata2.flipY = false;
+
+        }
+
+        if(this.rata3.y == 50){
+            this.rata3.flipY = true;
+        }
+
+        else if(this.rata3.y == 470){
+            this.rata3.flipY = false;
+
+        }
+
+        
+        if(this.rata4.x == 770){
+            this.rata4.flipY = true;
+        }
+
+        else if(this.rata4.x == 40){
+            this.rata4.flipY = false;
+
+        }
+
+        if(this.rata5.x == 670){
+            this.rata5.flipY = true;
+        }
+
+        else if(this.rata5.x == 140){
+            this.rata5.flipY = false;
+
         }
 
     }
