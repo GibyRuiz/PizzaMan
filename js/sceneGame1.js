@@ -30,9 +30,9 @@ class SceneGame extends Phaser.Scene {
     this.load.image('mesa2', 'mesa2.png');   
     this.load.image('mesa3', 'mesa3.png');   
     this.load.image('mesa4', 'mesa4.png');   
-    this.load.image('mesaGrande', 'mesaGrande.png');   
-    this.load.image('mesaMadera1', 'mesaMadera1.png');   
-    this.load.image('mesaMadera2', 'mesaMadera2.png');   
+    this.load.image('mesaGrande', 'mesagrande.png');   
+    this.load.image('mesaMadera1', 'mesamadera1.png');   
+    this.load.image('mesaMadera2', 'mesamadera2.png');   
     this.load.image('piso', 'pisotemporal.png');   
 
 }
