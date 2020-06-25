@@ -11,6 +11,7 @@ class SceneGame extends Phaser.Scene {
     this.load.audio('mama', 'mamaMia.mp3' )
     this.load.audio('yuhu', 'wooHoo.mp3' )
 
+    this.load.image('corazon', 'corazon.png');
 
     this.load.image('pizzaMan1', 'Sprite-1.png');
     this.load.image('pizzaMan2', 'Sprite-2.png');
@@ -53,9 +54,9 @@ class SceneGame extends Phaser.Scene {
         this.sound.pauseOnBlur = false
         this.music.detune = 200
 
-        this.anims.create({
+         this.anims.create({
             key: 'pizzaManWalk',
-            frames: [
+            frames: [   
                 { key: 'pizzaMan1' },
                 { key: 'pizzaMan2' },
                 { key: 'pizzaMan3' },
@@ -102,6 +103,9 @@ class SceneGame extends Phaser.Scene {
         this.grupoCocina.create(50, 550, 'mesaMadera2');
         this.grupoCocina.create(750, 338, 'horno');
         this.grupoCocina.create(340, 550, 'hornoMesa')
+
+        this.textScore = this.add.text(610, 60, 'SCORE: 00', { font: '30px Piedra, cursive', fill: '#bf0000' });
+
 
 
         this.ratas = this.physics.add.group();
@@ -186,10 +190,26 @@ class SceneGame extends Phaser.Scene {
         
         this.physics.add.overlap(this.pizzaMan, this.ratas, chocaRatas);
 
+        var corazones = this.add.group({
+            key: 'corazon',
+            repeat: 2,
+            setXY:
+            {
+                x: 622,
+                y: 35,
+                stepX: 39
+            },
+            setScale: { x: .25, y: .25 }
+            
+    
+        });
+
         var pizzaMan = this.pizzaMan
 
         function chocaRatas(){
             mama.play()
+
+            
             if(controlaAlfa){
                 controlaAlfa = false
             setTimeout(() => {
@@ -208,17 +228,25 @@ class SceneGame extends Phaser.Scene {
 
             setTimeout(() => {
                controlaAlfa = true
+               vidas--
+               var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
+            arrCorazones.setTint(0x0000ff);
+            arrCorazones.destroy()
             }, 750)
         }
 
-        }
+        
 
+    }   
+
+    
         
 
         // GRUPOS:
         // group.createMultiple({ key: ['imagen2', 'imagen1', ...]});
         // Phaser.Actions.SetXY(grupo.getChildren(), origenX, origenY, stepX);
         // Phaser.Actions.SetXY([group.getChildren()[0]], origenX, origenY, stepX);
+        // Phaser.Actions.Rotate(group.getChildren(), angle, velocity);
 
 
 
@@ -232,7 +260,6 @@ class SceneGame extends Phaser.Scene {
         if (this.cursors.left.isDown)
         {
             this.pizzaMan.angle -= 4
-            
         }
         
         else if (this.cursors.right.isDown)
@@ -292,6 +319,12 @@ class SceneGame extends Phaser.Scene {
 
         else if(this.rata5.x == 140){
             this.rata5.flipY = false;
+
+        }
+
+        if(vidas == 0){
+            this.music.detune = -500
+            this.scene.start("Creditos")
 
         }
 
