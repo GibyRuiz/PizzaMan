@@ -7,6 +7,10 @@ class SceneGame extends Phaser.Scene {
 
     preload ()
 {
+    this.load.audio('tarantela', 'tarantela.mp3' )
+    this.load.audio('mama', 'mamaMia.mp3' )
+    this.load.audio('yuhu', 'wooHoo.mp3' )
+
 
     this.load.image('pizzaMan1', 'Sprite-1.png');
     this.load.image('pizzaMan2', 'Sprite-2.png');
@@ -39,6 +43,16 @@ class SceneGame extends Phaser.Scene {
 
     create ()
     {
+
+        this.music = this.sound.add('tarantela', {loop: true});
+        var mama = this.sound.add('mama');
+        var yuhu = this.sound.add('yuhu');
+        yuhu.detune = 300
+        mama.detune = 1000
+
+        this.sound.pauseOnBlur = false
+        this.music.detune = 200
+
         this.anims.create({
             key: 'pizzaManWalk',
             frames: [
@@ -96,9 +110,9 @@ class SceneGame extends Phaser.Scene {
         this.rata2 = this.ratas.create(620, 460, 'rata1').play("rataWalk")
         this.rata3 = this.ratas.create(200, 50, 'rata1').play("rataWalk")
         this.rata4 = this.ratas.create(40, 480, 'rata1').play("rataWalk")
-        this.rata4.setSize(70, 30).angle = 90
+        this.rata4.setSize(60, 25).angle = 90
         this.rata5 = this.ratas.create(140, 180, 'rata1').play("rataWalk")
-        this.rata5.setSize(70, 30).angle = 90
+        this.rata5.setSize(60, 25).angle = 90
 
 
 
@@ -151,7 +165,7 @@ class SceneGame extends Phaser.Scene {
 
         
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
-        this.pizzaMan.setSize(50, 50)        
+        this.pizzaMan.setSize(40, 50)        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -169,12 +183,37 @@ class SceneGame extends Phaser.Scene {
         
         this.physics.add.collider(this.pizzaMan, this.grupoCocina);
 
-        // COLISIONES:
-        // forma 1:
-        // this.physics.add.collider(sprite, [ grupo1, grupo2, ... ], function);
+        
+        this.physics.add.overlap(this.pizzaMan, this.ratas, chocaRatas);
 
-        // forma 2:
-        // this.physics.add.overlap(sprite, grupo, function);
+        var pizzaMan = this.pizzaMan
+
+        function chocaRatas(){
+            mama.play()
+            if(controlaAlfa){
+                controlaAlfa = false
+            setTimeout(() => {
+                pizzaMan.setAlpha(0.2)
+            }, 150)
+            
+            setTimeout(() => {
+                pizzaMan.setAlpha(1)
+            }, 250)
+            setTimeout(() => {
+                pizzaMan.setAlpha(0.2)
+            }, 350)
+            setTimeout(() => {
+                pizzaMan.setAlpha(1)
+            }, 450)
+
+            setTimeout(() => {
+               controlaAlfa = true
+            }, 750)
+        }
+
+        }
+
+        
 
         // GRUPOS:
         // group.createMultiple({ key: ['imagen2', 'imagen1', ...]});
@@ -184,6 +223,7 @@ class SceneGame extends Phaser.Scene {
 
 
     }
+    
 
     update(){
 
@@ -203,7 +243,10 @@ class SceneGame extends Phaser.Scene {
         if (this.cursors.up.isDown)
         {
             this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
-
+            if(playMusic){
+            this.music.play()
+            playMusic = false
+            }
         }
 
         if(this.rata1.y == 150){

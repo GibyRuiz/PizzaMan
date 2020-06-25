@@ -19,3 +19,5 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+var playMusic = true;
+var controlaAlfa = true;
