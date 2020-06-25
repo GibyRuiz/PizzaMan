@@ -4,7 +4,7 @@ var config = {
     width: 800,
     height: 600,
     backgroundColor: "#B7B2F6",
-    scene: [SceneGame, Creditos],
+    scene: [Menu, Creditos],
     physics: {
         default: 'arcade',
         arcade: {
@@ -22,3 +22,7 @@ var game = new Phaser.Game(config);
 var playMusic = true;
 var controlaAlfa = true;
 var vidas = 3;
+var cambiaEscena = false;
+
+
+

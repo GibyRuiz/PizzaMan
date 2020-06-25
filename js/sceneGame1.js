@@ -323,7 +323,7 @@ class SceneGame extends Phaser.Scene {
         }
 
         if(vidas == 0){
-            this.music.detune = -500
+            this.music.detune = 0
             this.scene.start("Creditos")
 
         }

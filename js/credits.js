@@ -99,6 +99,8 @@ class Creditos extends Phaser.Scene {
             duration: 30000,
             delay: 2000
         });
+
+       
     }
 
     update(){
