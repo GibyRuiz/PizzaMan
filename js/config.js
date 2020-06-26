@@ -23,6 +23,7 @@ var playMusic = true;
 var controlaAlfa = true;
 var vidas = 3;
 var cambiaEscena = false;
+var music;
 
 
 

@@ -30,6 +30,13 @@ class Creditos extends Phaser.Scene {
 
     create(){
 
+        this.tweens.add({
+            targets: music,
+            detune:0,
+            duration: 500,
+            delay: 500,
+            ease: "Linear"
+        })
 
         this.add.image(0, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.add.image(665, 0, "piso").setOrigin(0).setTint(0xff2d00)
@@ -87,18 +94,34 @@ class Creditos extends Phaser.Scene {
             }
         }
     
-        this.scoreText = this.make.text(this.configText);
+        this.creditsText = this.make.text(this.configText);
 
-        this.scoreText.setText(["Esteban Ruiz\n\n\n","Guido Culasso\n\n\n","Guido Cursio\n\n\n","Sofía Perassi\n\n\n","Denise Rey\n\n\n"
+        this.creditsText.setText(["Esteban Ruiz\n\n\n","Guido Culasso\n\n\n","Guido Cursio\n\n\n","Sofía Perassi\n\n\n","Denise Rey\n\n\n"
         ,"Matías Biase\n\n\n","Luis Tello\n\n\n","Julián Hang\n\n\n\n\n\n","CRÉDITOS"])
         
         this.tweens.add({
-            targets: this.scoreText,
+            targets: this.creditsText,
             y: 1000,
             ease: 'linear',
             duration: 30000,
             delay: 2000
         });
+
+        this.tweens.add({
+            targets: [this.pizzaMan, this.rata],
+            alpha: 0,
+            ease: 'linear',
+            duration: 3000,
+            delay: 25000
+        });
+
+        this.tweens.add({
+            targets: music,
+            volume:0,
+            duration: 4000,
+            delay: 25000,
+            ease: "Power1"
+        })
 
        
     }
