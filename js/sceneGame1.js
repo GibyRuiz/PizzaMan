@@ -13,6 +13,13 @@ class SceneGame extends Phaser.Scene {
 
     this.load.image('corazon', 'corazon.png');
 
+    this.load.image('ajo', 'ajo.png');
+    this.load.image('cebolla', 'cebolla.png');
+    this.load.image('harina', 'harina.png');
+    this.load.image('lata', 'lata.png');
+    this.load.image('queso', 'queso.png');
+    this.load.image('tomate', 'tomate.png');
+
     this.load.image('pizzaMan1', 'Sprite-1.png');
     this.load.image('pizzaMan2', 'Sprite-2.png');
     this.load.image('pizzaMan3', 'Sprite-3.png');
@@ -50,6 +57,8 @@ class SceneGame extends Phaser.Scene {
         var yuhu = this.sound.add('yuhu');
         yuhu.detune = 300
         mama.detune = 1000
+        this.mama = mama
+        
 
         this.sound.pauseOnBlur = false
         this.music.detune = 200
@@ -91,6 +100,17 @@ class SceneGame extends Phaser.Scene {
 
         this.add.image(0, 0, "piso").setOrigin(0)
         this.add.image(665, 0, "piso").setOrigin(0)
+        this.add.image(750, 250, "tomate").setScale(1.3)
+        this.add.image(750, 450, "cebolla").setScale(1.4)
+        this.add.image(550, 560, "queso").setScale(1.5)
+        this.add.image(140, 560, "ajo").setScale(1.4)
+        this.add.image(650, 150, "lata").setScale(1.4)
+        this.add.image(530, 60, "harina").setScale(1.4)
+        this.add.image(170, 60, "tomate").setScale(1.3)
+        this.add.image(50, 450, "lata").setScale(1.4)
+        this.add.image(500, 300, "ajo").setScale(1.4)
+
+
 
 
         this.grupoCocina = this.physics.add.staticGroup();
@@ -213,25 +233,28 @@ class SceneGame extends Phaser.Scene {
             if(controlaAlfa){
                 controlaAlfa = false
             setTimeout(() => {
-                pizzaMan.setAlpha(0.2)
+                pizzaMan.setAlpha(0.4)
+                pizzaMan.setTint(0xff0000)
             }, 150)
             
             setTimeout(() => {
                 pizzaMan.setAlpha(1)
+                pizzaMan.clearTint()
             }, 250)
             setTimeout(() => {
-                pizzaMan.setAlpha(0.2)
+                pizzaMan.setAlpha(0.4)
+                pizzaMan.setTint(0xff0000)
             }, 350)
             setTimeout(() => {
                 pizzaMan.setAlpha(1)
+                pizzaMan.clearTint()
             }, 450)
 
             setTimeout(() => {
                controlaAlfa = true
                vidas--
                var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
-            arrCorazones.setTint(0x0000ff);
-            arrCorazones.destroy()
+               arrCorazones.destroy()
             }, 750)
         }
 
@@ -255,6 +278,22 @@ class SceneGame extends Phaser.Scene {
 
     update(){
 
+        if(vidas == 0){
+            stopVelocity = false
+            this.pizzaMan.setVelocity(0,0)
+            this.pizzaMan.angle += 30
+            this.pizzaMan.setScale(1.5)
+            this.pizzaMan.alpha = 1
+            this.mama.volume = 0
+            var escena = this.scene
+            music = this.music
+            
+            setTimeout(() => {
+                escena.start("Creditos")
+            }, 300)
+
+        }
+
         this.pizzaMan.setVelocity(0)
 
         if (this.cursors.left.isDown)
@@ -267,7 +306,7 @@ class SceneGame extends Phaser.Scene {
             this.pizzaMan.angle += 4
         }
 
-        if (this.cursors.up.isDown)
+        if (this.cursors.up.isDown && stopVelocity)
         {
             this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
             if(playMusic){
@@ -322,19 +361,7 @@ class SceneGame extends Phaser.Scene {
 
         }
 
-        if(vidas == 0){
-            var escena = this.scene
-            // this.music.detune = 0
-            music = this.music
-            
-            setTimeout(() => {
-                escena.start("Creditos")
-            }, 300)
-
-            
-           
-
-        }
+       
 
     }
 

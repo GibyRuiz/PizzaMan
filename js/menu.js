@@ -35,16 +35,24 @@ class Menu extends Phaser.Scene {
         this.boton.setInteractive()
         var btn = this.boton
 
+        this.boton.on('pointerup', function () {
+
+            btn.setScale(.8)
+            cambiaEscena = true
+            
+        });
+
         this.boton.on('pointerdown', function () {
 
         
-            cambiaEscena = true
+            btn.setScale(.6)
             
         });
 
         this.boton.on('pointerover', function () {
 
         btn.setScale(.8)
+        btn.setTint(0xffff00)
             
             
         });
@@ -52,9 +60,19 @@ class Menu extends Phaser.Scene {
         this.boton.on('pointerout', function () {
 
             btn.setScale(.5)
+            btn.clearTint()
                 
                 
             });
+
+        this.tweens.add({
+            targets: this.boton,
+            scale: .9,
+            duration: 150,
+            repeat: 5,
+            yoyo: true,
+            delay: 1200
+        })
 
     }
 
