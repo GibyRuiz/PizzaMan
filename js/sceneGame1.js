@@ -58,7 +58,8 @@ class SceneGame extends Phaser.Scene {
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
         this.noo = this.sound.add('nooo');
-        yuhu.detune = 300
+        yuhu.detune = 400
+        yuhu.volume = 3
         mama.detune = 1000
         this.mama = mama
         
@@ -103,17 +104,6 @@ class SceneGame extends Phaser.Scene {
 
         this.add.image(0, 0, "piso").setOrigin(0)
         this.add.image(665, 0, "piso").setOrigin(0)
-        this.add.image(750, 250, "tomate").setScale(1.3)
-        this.add.image(750, 450, "cebolla").setScale(1.4)
-        this.add.image(550, 560, "queso").setScale(1.5)
-        this.add.image(140, 560, "ajo").setScale(1.4)
-        this.add.image(650, 150, "lata").setScale(1.4)
-        this.add.image(530, 60, "harina").setScale(1.4)
-        this.add.image(170, 60, "tomate").setScale(1.3)
-        this.add.image(50, 450, "lata").setScale(1.4)
-        this.add.image(500, 300, "ajo").setScale(1.4)
-
-
 
 
         this.grupoCocina = this.physics.add.staticGroup();
@@ -127,7 +117,23 @@ class SceneGame extends Phaser.Scene {
         this.grupoCocina.create(750, 338, 'horno');
         this.grupoCocina.create(340, 550, 'hornoMesa')
 
-        this.textScore = this.add.text(610, 60, 'SCORE: 00', { font: '30px Piedra, cursive', fill: '#bf0000' });
+        this.grupoIngredientes = this.physics.add.group();
+        var grupoIngredientes = this.grupoIngredientes
+        this.grupoIngredientes.create(750, 250, "tomate").setScale(1.3)
+        this.grupoIngredientes.create(750, 450, "cebolla").setScale(1.4)
+        this.grupoIngredientes.create(140, 560, "ajo").setScale(1.4)
+        this.grupoIngredientes.create(550, 560, "queso").setScale(1.5)
+        this.grupoIngredientes.create(650, 150, "lata").setScale(1.4)
+        this.grupoIngredientes.create(530, 60, "harina").setScale(1.4)
+        this.grupoIngredientes.create(145, 40, "tomate").setScale(1.3)
+        this.grupoIngredientes.create(50, 450, "lata").setScale(1.4)
+        this.grupoIngredientes.create(500, 300, "ajo").setScale(1.4)
+        this.grupoIngredientes.create(195, 350, "queso").setScale(1.5)
+        this.grupoIngredientes.create(260, 40, "harina").setScale(1.4)
+        this.grupoIngredientes.create(400, 200, "cebolla").setScale(1.4)
+
+
+        var textScore = this.add.text(610, 60, 'SCORE: 0', { font: '30px Piedra, cursive', fill: '#bf0000' });
 
 
 
@@ -144,16 +150,17 @@ class SceneGame extends Phaser.Scene {
 
 
 
-        this.tweens.add({
+        this.tweenRata1 = this.tweens.add({
             targets: this.rata1,
             duration:2000,
             y: 150,
             repeat: -1,
             yoyo: true,
-            ease: 'linear'
+            ease: 'linear',                
+                    
         })
 
-        this.tweens.add({
+        this.tweenRata2 = this.tweens.add({
             targets: this.rata2,
             duration:2000,
             y: 150,
@@ -163,7 +170,7 @@ class SceneGame extends Phaser.Scene {
             delay: 1500
         })
 
-        this.tweens.add({
+        this.tweenRata3 = this.tweens.add({
             targets: this.rata3,
             duration:2000,
             y: 470,
@@ -172,7 +179,7 @@ class SceneGame extends Phaser.Scene {
             ease: 'linear'
         })
 
-        this.tweens.add({
+        this.tweenRata4 = this.tweens.add({
             targets: this.rata4,
             duration:3000,
             x: 770,
@@ -181,7 +188,7 @@ class SceneGame extends Phaser.Scene {
             ease: 'linear'
         })
 
-        this.tweens.add({
+        this.tweenRata5 =this.tweens.add({
             targets: this.rata5,
             duration:2000,
             x: 670,
@@ -191,8 +198,10 @@ class SceneGame extends Phaser.Scene {
         })
 
         
+
+        
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
-        this.pizzaMan.setSize(40, 50)        
+        this.pizzaMan.setCircle(17, 12, 15)        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -210,7 +219,13 @@ class SceneGame extends Phaser.Scene {
         
         this.physics.add.collider(this.pizzaMan, this.grupoCocina);
 
-        
+        this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
+            ing.disableBody(true, true);
+            puntos++
+            textScore.setText("SCORE: " + puntos)
+            yuhu.play()
+             } );
+
         this.physics.add.overlap(this.pizzaMan, this.ratas, chocaRatas);
 
         var corazones = this.add.group({
@@ -226,6 +241,8 @@ class SceneGame extends Phaser.Scene {
             
     
         });
+
+        
 
         var pizzaMan = this.pizzaMan
 
@@ -265,21 +282,13 @@ class SceneGame extends Phaser.Scene {
 
     }   
 
-    
-        
 
-        // GRUPOS:
-        // group.createMultiple({ key: ['imagen2', 'imagen1', ...]});
-        // Phaser.Actions.SetXY(grupo.getChildren(), origenX, origenY, stepX);
-        // Phaser.Actions.SetXY([group.getChildren()[0]], origenX, origenY, stepX);
-        // Phaser.Actions.Rotate(group.getChildren(), angle, velocity);
-
-
-
-    }
+}
     
 
     update(){
+
+        Phaser.Actions.Rotate(this.grupoIngredientes.getChildren(), .05);
 
         if(vidas == 0){
             stopVelocity = false
@@ -301,6 +310,20 @@ class SceneGame extends Phaser.Scene {
         }
 
         this.pizzaMan.setVelocity(0)
+
+        if (this.grupoIngredientes.countActive(true) === 0){
+            this.tweenRata1.timeScale +=.2;
+            this.tweenRata2.timeScale +=.2;
+            this.tweenRata3.timeScale +=.2;
+            this.tweenRata4.timeScale +=.2;
+            this.tweenRata5.timeScale +=.2;
+
+            this.grupoIngredientes.children.iterate(function (child) {
+
+                child.enableBody(true, child.x, child.y, true, true);
+    
+            });
+        }
 
         if (this.cursors.left.isDown)
         {

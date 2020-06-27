@@ -26,6 +26,7 @@ var cambiaEscena = false;
 var music;
 var stopVelocity = true;
 musicaPortada = true;
+var puntos = 0;
 
 
 
