@@ -9,23 +9,20 @@ class Menu extends Phaser.Scene {
 
         this.load.image("portada", "pizzaManPortada.png")
         this.load.image("play", "botonPlay.png")
-        this.load.audio('tarantela', 'tarantela.mp3')
+        this.load.image("bgCredits", "backgroundCreditos.png")
+        this.load.image("textCredits", "creditos.png")
+
+
     }
 
     create(){
-        this.music = this.sound.add('tarantela', {loop: true});
-        var music = this.music
         this.portada = this.add.image(1400, 300, "portada").setScale(.5)
         this.boton = this.add.image(-100, 490, "play").setScale(.5)
+        this.bgCredits = this.add.image(0, 0, "bgCredits").setScale(.25)
+        this.txtCredits = this.add.image(0, 0, "textCredits").setScale(.8)
 
-        this.portada.setInteractive()
-
-        this.portada.on("pointerover", function(){
-           if(musicaPortada){
-            music.play()
-            musicaPortada = false
-        }
-        })
+        this.bgCredits.setInteractive()
+        this.contenedorCreditos = this.add.container(680, 60, [this.bgCredits, this.txtCredits])
 
 
         this.tweens.add({
@@ -44,6 +41,35 @@ class Menu extends Phaser.Scene {
 
         })
 
+        this.bgCredits.on('pointerover', function () {
+
+            this.setTint(0x0fff00)
+                
+                
+         });
+
+         this.bgCredits.on('pointerout', function () {
+
+            this.clearTint()
+                
+                
+         });
+
+        this.bgCredits.on('pointerdown', function () {
+
+                this.setScale(.22)
+                    
+                    
+         });
+         var escena = this.scene
+         this.bgCredits.on('pointerup', function () {
+
+            this.setScale(.25)
+            escena.start("Creditos")
+   
+                        
+        });
+
         this.boton.setInteractive()
         var btn = this.boton
 
@@ -51,7 +77,6 @@ class Menu extends Phaser.Scene {
 
             btn.setScale(.8)
             cambiaEscena = true
-            music.stop()
         });
 
         this.boton.on('pointerdown', function () {
