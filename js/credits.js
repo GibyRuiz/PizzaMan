@@ -32,9 +32,9 @@ class Creditos extends Phaser.Scene {
 
         this.tweens.add({
             targets: music,
-            detune:0,
-            duration: 500,
-            delay: 500,
+            detune:100,
+            duration: 2000,
+            delay: 0,
             ease: "Linear"
         })
 

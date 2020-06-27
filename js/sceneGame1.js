@@ -10,6 +10,8 @@ class SceneGame extends Phaser.Scene {
     this.load.audio('tarantela', 'tarantela.mp3' )
     this.load.audio('mama', 'mamaMia.mp3' )
     this.load.audio('yuhu', 'wooHoo.mp3' )
+    this.load.audio('nooo', 'nooo.mp3' )
+
 
     this.load.image('corazon', 'corazon.png');
 
@@ -55,6 +57,7 @@ class SceneGame extends Phaser.Scene {
         this.music = this.sound.add('tarantela', {loop: true});
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
+        this.noo = this.sound.add('nooo');
         yuhu.detune = 300
         mama.detune = 1000
         this.mama = mama
@@ -285,6 +288,9 @@ class SceneGame extends Phaser.Scene {
             this.pizzaMan.setScale(1.5)
             this.pizzaMan.alpha = 1
             this.mama.volume = 0
+            this.noo.detune = 400
+            this.noo.volume = 2
+            this.noo.play()
             var escena = this.scene
             music = this.music
             

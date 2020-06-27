@@ -9,11 +9,23 @@ class Menu extends Phaser.Scene {
 
         this.load.image("portada", "pizzaManPortada.png")
         this.load.image("play", "botonPlay.png")
+        this.load.audio('tarantela', 'tarantela.mp3')
     }
 
     create(){
+        this.music = this.sound.add('tarantela', {loop: true});
+        var music = this.music
         this.portada = this.add.image(1400, 300, "portada").setScale(.5)
         this.boton = this.add.image(-100, 490, "play").setScale(.5)
+
+        this.portada.setInteractive()
+
+        this.portada.on("pointerover", function(){
+           if(musicaPortada){
+            music.play()
+            musicaPortada = false
+        }
+        })
 
 
         this.tweens.add({
@@ -39,7 +51,7 @@ class Menu extends Phaser.Scene {
 
             btn.setScale(.8)
             cambiaEscena = true
-            
+            music.stop()
         });
 
         this.boton.on('pointerdown', function () {
