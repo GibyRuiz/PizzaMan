@@ -55,6 +55,7 @@ class SceneGame extends Phaser.Scene {
         stopVelocity = true;
         vidas = 3;
         playMusic = true;
+        iniciaGameOver = true;
         puntos = 0;
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
@@ -271,7 +272,7 @@ class SceneGame extends Phaser.Scene {
             }, 450)
 
             setTimeout(() => {
-               controlaAlfa = true
+               
                vidas--
                if(vidas > -1){
                var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
@@ -279,6 +280,7 @@ class SceneGame extends Phaser.Scene {
                arrCorazones.destroy()
                }
                }
+               controlaAlfa = true
             }, 750)
         }
 
@@ -303,7 +305,6 @@ class SceneGame extends Phaser.Scene {
             this.pizzaMan.setScale(1.5)
             this.pizzaMan.setCircle(5, 30, 30)
             this.pizzaMan.alpha = 1
-            this.mama.volume = 0
             this.noo.detune = 400
             this.noo.volume = 2
             this.noo.play()
@@ -317,7 +318,12 @@ class SceneGame extends Phaser.Scene {
                 escena.add("JuegoTerminado", new JuegoTerminado)
                 startGameOver = false
             }
+
+            if(iniciaGameOver){
                 escena.start("JuegoTerminado")
+                iniciaGameOver = false;
+            }
+                
             }, 1000)
 
         }
