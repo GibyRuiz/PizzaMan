@@ -30,13 +30,7 @@ class Creditos extends Phaser.Scene {
 
     create(){
 
-        this.tweens.add({
-            targets: music,
-            detune:100,
-            duration: 2000,
-            delay: 0,
-            ease: "Linear"
-        })
+        
 
         this.add.image(0, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.add.image(665, 0, "piso").setOrigin(0).setTint(0xff2d00)
@@ -115,13 +109,12 @@ class Creditos extends Phaser.Scene {
             delay: 25000
         });
 
-        this.tweens.add({
-            targets: music,
-            volume:0,
-            duration: 4000,
-            delay: 25000,
-            ease: "Power1"
-        })
+        var escena = this.scene
+
+
+        setTimeout(() => {
+            escena.start("Menu")
+        }, 30000)
 
        
     }

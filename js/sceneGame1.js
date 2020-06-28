@@ -7,7 +7,7 @@ class SceneGame extends Phaser.Scene {
 
     preload ()
 {
-    this.load.audio('tarantela', 'tarantela.mp3' )
+    // this.load.audio('tarantela', 'tarantela.mp3' )
     this.load.audio('mama', 'mamaMia.mp3' )
     this.load.audio('yuhu', 'wooHoo.mp3' )
     this.load.audio('nooo', 'nooo.mp3' )
@@ -53,8 +53,10 @@ class SceneGame extends Phaser.Scene {
 
     create ()
     {
-
-        this.music = this.sound.add('tarantela', {loop: true});
+        stopVelocity = true;
+        vidas = 3;
+        playMusic = true;
+        // this.music = this.sound.add('tarantela', {loop: true});
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
         this.noo = this.sound.add('nooo');
@@ -63,9 +65,11 @@ class SceneGame extends Phaser.Scene {
         mama.detune = 1000
         this.mama = mama
         
+        
 
         this.sound.pauseOnBlur = false
-        this.music.detune = 200
+        
+        music.detune = 200
 
          this.anims.create({
             key: 'pizzaManWalk',
@@ -118,7 +122,6 @@ class SceneGame extends Phaser.Scene {
         this.grupoCocina.create(340, 550, 'hornoMesa')
 
         this.grupoIngredientes = this.physics.add.group();
-        var grupoIngredientes = this.grupoIngredientes
         this.grupoIngredientes.create(750, 250, "tomate").setScale(1.3)
         this.grupoIngredientes.create(750, 450, "cebolla").setScale(1.4)
         this.grupoIngredientes.create(140, 560, "ajo").setScale(1.4)
@@ -134,9 +137,7 @@ class SceneGame extends Phaser.Scene {
 
 
         var textScore = this.add.text(610, 60, 'SCORE: 0', { font: '30px Piedra, cursive', fill: '#bf0000' });
-
-
-
+       
         this.ratas = this.physics.add.group();
 
         this.rata1 = this.ratas.create(450, 460, 'rata1').play("rataWalk")
@@ -288,24 +289,33 @@ class SceneGame extends Phaser.Scene {
 
     update(){
 
+        
         Phaser.Actions.Rotate(this.grupoIngredientes.getChildren(), .05);
 
         if(vidas == 0){
+            
             stopVelocity = false
             this.pizzaMan.setVelocity(0,0)
             this.pizzaMan.angle += 30
             this.pizzaMan.setScale(1.5)
+            this.pizzaMan.setCircle(5, 30, 30)
             this.pizzaMan.alpha = 1
             this.mama.volume = 0
             this.noo.detune = 400
             this.noo.volume = 2
             this.noo.play()
             var escena = this.scene
-            music = this.music
+            
             
             setTimeout(() => {
-                escena.start("Creditos")
-            }, 300)
+
+                if(startGameOver){
+                
+                escena.add("GameOVer", new GameOver)
+                startGameOver = false
+            }
+                escena.start("GameOver")
+            }, 1000)
 
         }
 
@@ -339,7 +349,7 @@ class SceneGame extends Phaser.Scene {
         {
             this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
             if(playMusic){
-            this.music.play()
+            music.play()
             playMusic = false
             }
         }

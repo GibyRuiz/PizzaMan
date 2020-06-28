@@ -19,14 +19,17 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-var playMusic = true;
+var playMusic;
 var controlaAlfa = true;
-var vidas = 3;
+var vidas;
 var cambiaEscena = false;
 var music;
-var stopVelocity = true;
+var stopVelocity;
 musicaPortada = true;
 var puntos = 0;
+var textRefresh = true;
+var startGame = true;
+startGameOver = true
 
 
 

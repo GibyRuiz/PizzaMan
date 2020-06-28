@@ -12,10 +12,15 @@ class Menu extends Phaser.Scene {
         this.load.image("bgCredits", "backgroundCreditos.png")
         this.load.image("textCredits", "creditos.png")
 
+        this.load.audio('tarantela', 'tarantela.mp3' )
+
 
     }
 
     create(){
+
+        this.music = this.sound.add('tarantela', {loop: true});
+        music = this.music
         this.portada = this.add.image(1400, 300, "portada").setScale(.5)
         this.boton = this.add.image(-100, 490, "play").setScale(.5)
         this.bgCredits = this.add.image(0, 0, "bgCredits").setScale(.25)
@@ -111,11 +116,16 @@ class Menu extends Phaser.Scene {
             delay: 1200
         })
 
+        
+
     }
 
     update(){
         if(cambiaEscena){
+            if(startGame){
             this.scene.add("SceneGame", new SceneGame)
+            startGame = false
+        }
             this.scene.start("SceneGame")
             cambiaEscena = false
         }
