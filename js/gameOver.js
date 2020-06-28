@@ -1,21 +1,20 @@
-class GameOver extends Phaser.Scene {
+class JuegoTerminado extends Phaser.Scene {
 
     constructor()
     {
-        super({key:"GameOver"});
+        super({key:"JuegoTerminado"});
     }
 
     preload(){
-
-        this.load.image("gameOver", "pantalla game over 1.png")
+        
+        this.load.image("finishGame", "gOver.png")
     }
 
     create(){
-        this.imgGameOver = this.add.image(400,-400, "gameOver").setScale(.5)
+        this.imgGameOver = this.add.sprite(400, -400, "finishGame").setScale(.5)
 
         this.tweens.add({
             targets: this.imgGameOver,
-            
             duration: 300,
             delay: 0,
             y: 300,

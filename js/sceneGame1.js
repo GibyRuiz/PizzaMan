@@ -7,7 +7,6 @@ class SceneGame extends Phaser.Scene {
 
     preload ()
 {
-    // this.load.audio('tarantela', 'tarantela.mp3' )
     this.load.audio('mama', 'mamaMia.mp3' )
     this.load.audio('yuhu', 'wooHoo.mp3' )
     this.load.audio('nooo', 'nooo.mp3' )
@@ -57,7 +56,6 @@ class SceneGame extends Phaser.Scene {
         vidas = 3;
         playMusic = true;
         puntos = 0;
-        // this.music = this.sound.add('tarantela', {loop: true});
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
         this.noo = this.sound.add('nooo');
@@ -275,8 +273,12 @@ class SceneGame extends Phaser.Scene {
             setTimeout(() => {
                controlaAlfa = true
                vidas--
+               if(vidas > -1){
                var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
+               if(arrCorazones !== undefined){
                arrCorazones.destroy()
+               }
+               }
             }, 750)
         }
 
@@ -312,10 +314,10 @@ class SceneGame extends Phaser.Scene {
 
                 if(startGameOver){
                 
-                escena.add("GameOVer", new GameOver)
+                escena.add("JuegoTerminado", new JuegoTerminado)
                 startGameOver = false
             }
-                escena.start("GameOver")
+                escena.start("JuegoTerminado")
             }, 1000)
 
         }
