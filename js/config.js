@@ -26,7 +26,7 @@ var cambiaEscena = false;
 var music;
 var stopVelocity;
 musicaPortada = true;
-var puntos = 0;
+var puntos;
 var textRefresh = true;
 var startGame = true;
 startGameOver = true

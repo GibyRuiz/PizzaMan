@@ -70,7 +70,10 @@ class Menu extends Phaser.Scene {
          this.bgCredits.on('pointerup', function () {
 
             this.setScale(.25)
-            escena.start("Creditos")
+            setTimeout(() => {
+                escena.start("Creditos")
+            }, 300)
+            
    
                         
         });
@@ -81,7 +84,10 @@ class Menu extends Phaser.Scene {
         this.boton.on('pointerup', function () {
 
             btn.setScale(.8)
-            cambiaEscena = true
+            setTimeout(() => {
+                cambiaEscena = true
+            }, 300)
+            
         });
 
         this.boton.on('pointerdown', function () {

@@ -11,7 +11,18 @@ class GameOver extends Phaser.Scene {
     }
 
     create(){
-        this.add.image(400,300, "gameOver").setScale(.5)
+        this.imgGameOver = this.add.image(400,-400, "gameOver").setScale(.5)
+
+        this.tweens.add({
+            targets: this.imgGameOver,
+            
+            duration: 300,
+            delay: 0,
+            y: 300,
+            ease: "Bounce"
+        })
+
+
         this.tweens.add({
             targets: music,
             detune:100,

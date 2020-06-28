@@ -56,6 +56,7 @@ class SceneGame extends Phaser.Scene {
         stopVelocity = true;
         vidas = 3;
         playMusic = true;
+        puntos = 0;
         // this.music = this.sound.add('tarantela', {loop: true});
         var mama = this.sound.add('mama');
         var yuhu = this.sound.add('yuhu');
