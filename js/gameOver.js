@@ -32,6 +32,6 @@ class GameOver extends Phaser.Scene {
         setTimeout(() => {
             
             escena.start("Menu");
-        }, 10000)
+        }, 8000)
     }
 }
