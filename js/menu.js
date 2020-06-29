@@ -25,6 +25,7 @@ class Menu extends Phaser.Scene {
         this.boton = this.add.image(-100, 490, "play").setScale(.5)
         this.bgCredits = this.add.image(0, 0, "bgCredits").setScale(.25)
         this.txtCredits = this.add.image(0, 0, "textCredits").setScale(.8)
+        var txtCredits = this.txtCredits
 
         this.bgCredits.setInteractive()
         this.contenedorCreditos = this.add.container(680, 60, [this.bgCredits, this.txtCredits])
@@ -56,6 +57,8 @@ class Menu extends Phaser.Scene {
          this.bgCredits.on('pointerout', function () {
 
             this.clearTint()
+            this.setScale(.25)
+            txtCredits.setScale(.8)
                 
                 
          });
@@ -63,6 +66,7 @@ class Menu extends Phaser.Scene {
         this.bgCredits.on('pointerdown', function () {
 
                 this.setScale(.22)
+                txtCredits.setScale(.7)
                     
                     
          });
@@ -70,6 +74,7 @@ class Menu extends Phaser.Scene {
          this.bgCredits.on('pointerup', function () {
 
             this.setScale(.25)
+            txtCredits.setScale(.8)
             setTimeout(() => {
                 escena.start("Creditos")
             }, 300)

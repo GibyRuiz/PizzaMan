@@ -255,8 +255,9 @@ class SceneGame extends Phaser.Scene {
         var pizzaMan = this.pizzaMan
 
         function chocaRatas(){
+            if(vidas > 0){
             mama.play()
-
+            }
             
             if(controlaAlfa){
                 controlaAlfa = false
