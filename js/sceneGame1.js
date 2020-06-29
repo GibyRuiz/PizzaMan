@@ -214,7 +214,13 @@ class SceneGame extends Phaser.Scene {
         })
 
         this.input.keyboard.on("keydown_UP", () => {
+            if(stopVelocity == true){
             this.pizzaMan.anims.play("pizzaManWalk");
+            }
+            else{
+                this.pizzaMan.anims.stop("pizzaManWalk");
+
+            }
         })
         
 
@@ -254,6 +260,7 @@ class SceneGame extends Phaser.Scene {
             
             if(controlaAlfa){
                 controlaAlfa = false
+                if(vidas > 0){
             setTimeout(() => {
                 pizzaMan.setAlpha(0.4)
                 pizzaMan.setTint(0xff0000)
@@ -271,6 +278,7 @@ class SceneGame extends Phaser.Scene {
                 pizzaMan.setAlpha(1)
                 pizzaMan.clearTint()
             }, 450)
+        }
 
             setTimeout(() => {
                
