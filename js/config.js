@@ -31,5 +31,6 @@ var textRefresh = true;
 var startGame = true;
 startGameOver = true
 var iniciaGameOver;
+var puntajeGlobal = 0;
 
 

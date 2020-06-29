@@ -309,6 +309,9 @@ class SceneGame extends Phaser.Scene {
             this.noo.detune = 400
             this.noo.volume = 2
             this.noo.play()
+            if(puntos > puntajeGlobal){
+            puntajeGlobal = puntos
+            }
             var escena = this.scene
             
             
