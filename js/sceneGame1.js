@@ -343,7 +343,7 @@ class SceneGame extends Phaser.Scene {
     
             });
         }
-
+        if(stopVelocity){
         if (this.cursors.left.isDown)
         {
             this.pizzaMan.angle -= 4
@@ -354,13 +354,15 @@ class SceneGame extends Phaser.Scene {
             this.pizzaMan.angle += 4
         }
 
-        if (this.cursors.up.isDown && stopVelocity)
+        if (this.cursors.up.isDown )
         {
             this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
             if(playMusic){
             music.play()
             playMusic = false
             }
+        }
+
         }
 
         if(this.rata1.y == 150){
