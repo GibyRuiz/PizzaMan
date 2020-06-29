@@ -136,7 +136,8 @@ class SceneGame extends Phaser.Scene {
         this.grupoIngredientes.create(400, 200, "cebolla").setScale(1.4)
 
 
-        var textScore = this.add.text(610, 60, 'SCORE: 0', { font: '30px Piedra, cursive', fill: '#bf0000' });
+        var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' });
+        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true);
        
         this.ratas = this.physics.add.group();
 

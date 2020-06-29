@@ -34,9 +34,9 @@ class Creditos extends Phaser.Scene {
 
         this.add.image(0, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.add.image(665, 0, "piso").setOrigin(0).setTint(0xff2d00)
-        this.rata = this.add.sprite(100, 300, "rata1").setOrigin(0).setScale(1.5)
+        this.rata = this.add.sprite(90, 300, "rata1").setOrigin(0).setScale(1.5)
 
-        this.pizzaMan = this.add.sprite(610, 330, "pizzaMan1")
+        this.pizzaMan = this.add.sprite(650, 330, "pizzaMan1")
 
         this.anims.create({
             key: 'rataWalk',
@@ -79,19 +79,21 @@ class Creditos extends Phaser.Scene {
 
 
         this.configText = {
-            x: 280,
-            y: -1450,
+            x: 260,
+            y: -1350,
             text: "créditos",
             style:{
-                fontFamily: "Piedra, cursive",
+                fontFamily: "Arial Black",
                 fontSize: 40,
             }
         }
     
         this.creditsText = this.make.text(this.configText);
 
+        this.creditsText.setShadow(-1, 2, "#000000", 4, true, true);
+
         this.creditsText.setText(["Esteban Ruiz\n\n\n","Guido Culasso\n\n\n","Guido Cursio\n\n\n","Sofía Perassi\n\n\n","Denise Rey\n\n\n"
-        ,"Matías Biase\n\n\n","Luis Tello\n\n\n","Julián Hang\n\n\n\n\n\n","CRÉDITOS"])
+        ,"Matías Biase\n\n\n","Luis Tello\n\n\n","Julián Hang\n\n\n\n\n\n"," CRÉDITOS"])
         
         this.tweens.add({
             targets: this.creditsText,
