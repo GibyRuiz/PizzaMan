@@ -27,8 +27,11 @@ class Menu extends Phaser.Scene {
         this.txtCredits = this.add.image(0, 0, "textCredits").setScale(.8)
         var txtCredits = this.txtCredits
 
+        // this.bgCredits.setAlpha(0)
+        // txtCredits.setAlpha(0)
         this.bgCredits.setInteractive()
-        this.contenedorCreditos = this.add.container(680, 60, [this.bgCredits, this.txtCredits])
+        this.contenedorCreditos = this.add.container(-200, 60, [this.bgCredits, this.txtCredits])
+        this.contenedorCreditos.setAlpha(0)
 
 
         this.tweens.add({
@@ -37,6 +40,20 @@ class Menu extends Phaser.Scene {
             x: 400,
             ease: "Back.easeInOut",
 
+        })
+
+        this.tweens.add({
+            targets: this.contenedorCreditos,
+            duration: 100,
+            alpha: 1,
+            delay: 800
+        })
+
+        this.tweens.add({
+            targets: this.contenedorCreditos,
+            duration: 200,
+            x: 680,
+            delay: 800
         })
 
         this.tweens.add({
