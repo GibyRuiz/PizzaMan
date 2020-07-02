@@ -7,6 +7,7 @@ class Creditos extends Phaser.Scene {
 
     preload(){
 
+    // precarga de imágenes para animar a los personajes:
     this.load.image('rata1', 'Rata sprite 1.png');   
     this.load.image('rata2', 'Rata sprite 2.png');   
     this.load.image('rata3', 'Rata sprite 3.png');   
@@ -30,14 +31,13 @@ class Creditos extends Phaser.Scene {
 
     create(){
 
-        
-
+        // Carga de imágenes:
         this.add.image(0, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.add.image(665, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.rata = this.add.sprite(90, 300, "rata1").setOrigin(0).setScale(1.5)
-
         this.pizzaMan = this.add.sprite(650, 330, "pizzaMan1")
 
+        // Creación de animación de la rata:
         this.anims.create({
             key: 'rataWalk',
             frames: [
@@ -48,15 +48,12 @@ class Creditos extends Phaser.Scene {
                 { key: 'rata5' },
                 { key: 'rata6' },
                 
-
-
             ],
             frameRate: 15,
             repeat: -1
         });
 
-        this.rata.play("rataWalk")
-
+        // Creación de animación del PizzaMan:
         this.anims.create({
             key: 'pizzaManWalk',
             frames: [
@@ -69,15 +66,16 @@ class Creditos extends Phaser.Scene {
                 { key: 'pizzaMan7' },
                 { key: 'pizzaMan8' },
 
-
             ],
             frameRate: 23,
             repeat: -1
         });
 
+        // Ejecución de animaciones:
+        this.rata.play("rataWalk")
         this.pizzaMan.play("pizzaManWalk")
 
-
+        // Creación de texto de créditos:
         this.configText = {
             x: 260,
             y: -1350,
@@ -94,7 +92,9 @@ class Creditos extends Phaser.Scene {
 
         this.creditsText.setText(["Esteban Ruiz\n\n\n","Guido Culasso\n\n\n","Guido Cursio\n\n\n","Sofía Perassi\n\n\n","Denise Rey\n\n\n"
         ,"Matías Biase\n\n\n","Luis Tello\n\n\n","Julián Hang\n\n\n\n\n\n"," CRÉDITOS"])
-        
+
+
+        // Tween que se encarga de hacer bajar el texto de a poco:
         this.tweens.add({
             targets: this.creditsText,
             y: 1000,
@@ -103,6 +103,7 @@ class Creditos extends Phaser.Scene {
             delay: 2000
         });
 
+        // Tween que se encarga de quitarle alfa a los personajes al final:
         this.tweens.add({
             targets: [this.pizzaMan, this.rata],
             alpha: 0,
@@ -111,20 +112,20 @@ class Creditos extends Phaser.Scene {
             delay: 25000
         });
 
+        // Reinicio de escena de menú:
         var escena = this.scene
-
 
         setTimeout(() => {
             escena.start("Menu")
         }, 30000)
 
-       
-    }
+     }
 
     update(){
+
+        // Giro del pizzaMan:
         this.pizzaMan.angle += 3
 
-        
     }
 }
 

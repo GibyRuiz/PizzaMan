@@ -1,3 +1,5 @@
+// Configuración general:
+
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
@@ -18,18 +20,21 @@ var config = {
 
 };
 
-var game = new Phaser.Game(config);
+// Ejecución de constructor del objeto "Game" con el objeto "config" como parámetro:
+new Phaser.Game(config);
+
+// Variables globales:
 var playMusic;
 var controlaAlfa = true;
 var vidas;
 var cambiaEscena = false;
 var music;
 var stopVelocity;
-musicaPortada = true;
+var musicaPortada = true;
 var puntos;
 var textRefresh = true;
 var startGame = true;
-startGameOver = true
+var startGameOver = true
 var iniciaGameOver;
 var puntajeGlobal = 0;
 
