@@ -4,23 +4,25 @@ class Menu extends Phaser.Scene {
 
     constructor()
     {
-        super({key:"Menu"});
+        super({key:"Menu"})
     }
 
     preload(){
 
-        // Pre carga de assest:
+        // Pre carga de assest. Los assets como imágenes y sonidos están a nivel del archivo index.html para
+        // aprovechar el path por defecto de Visual Studio y porque Github Pages no los encontraba
+        // bien si los ponía en otro lado. Es un problema con el path y por ahora lo pude solucionar asi.
         this.load.image("portada", "pizzaManPortada.png")
         this.load.image("play", "botonPlay.png")
         this.load.image("bgCredits", "backgroundCreditos.png")
         this.load.image("textCredits", "creditos.png")
-        this.load.audio('tarantela', 'tarantela.mp3' )
+        this.load.audio("tarantela", "tarantela.mp3" )
     }
 
     create(){
 
         // Asignación de la música a la variable global "music":
-        this.music = this.sound.add('tarantela', {loop: true});
+        this.music = this.sound.add("tarantela", {loop: true});
         music = this.music
 
         // Carga de imágenes:
@@ -80,30 +82,30 @@ class Menu extends Phaser.Scene {
         })
 
         // Eventos con el mouse para el botón de créditos:
-        this.bgCredits.on('pointerover', function () {
+        this.bgCredits.on("pointerover", function () {
 
             this.setTint(0x0fff00)
                       
-         });
+         })
 
-         this.bgCredits.on('pointerout', function () {
+         this.bgCredits.on("pointerout", function () {
 
             this.clearTint()
             this.setScale(.25)
             txtCredits.setScale(.8)
                        
-         });
+         })
 
-        this.bgCredits.on('pointerdown', function () {
+        this.bgCredits.on("pointerdown", function () {
 
                 this.setScale(.22)
                 txtCredits.setScale(.7)
                                
-         });
+         })
 
         //  Evento que activa la escena de los créditos cuando se aprieta el botón de créditos:
          var escena = this.scene
-         this.bgCredits.on('pointerup', function () {
+         this.bgCredits.on("pointerup", function () {
 
             this.setScale(.25)
             txtCredits.setScale(.8)
@@ -111,40 +113,40 @@ class Menu extends Phaser.Scene {
                 escena.start("Creditos")
             }, 300)
                         
-        });
+        })
 
         // Evento que activa la escena del juego cuando se clickea el botón de play:
-        this.botonPlay.on('pointerup', function () {
+        this.botonPlay.on("pointerup", function () {
 
             btn.setScale(.8)
             setTimeout(() => {
                 cambiaEscena = true
             }, 300)
             
-        });
+        })
 
         // Eventos con el mouse para el botón de play:
-        this.botonPlay.on('pointerdown', function () {
+        this.botonPlay.on("pointerdown", function () {
 
         
             btn.setScale(.6)
             
-        });
+        })
 
-        this.botonPlay.on('pointerover', function () {
+        this.botonPlay.on("pointerover", function () {
 
         btn.setScale(.8)
         btn.setTint(0xffff00)
             
             
-        });
+        })
 
-        this.botonPlay.on('pointerout', function () {
+        this.botonPlay.on("pointerout", function () {
 
             btn.setScale(.5)
             btn.clearTint()
                 
-        });
+        })
 
     }
 

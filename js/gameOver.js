@@ -4,7 +4,7 @@ class JuegoTerminado extends Phaser.Scene {
 
     constructor()
     {
-        super({key:"JuegoTerminado"});
+        super({key:"JuegoTerminado"})
     }
 
     preload(){
@@ -19,8 +19,8 @@ class JuegoTerminado extends Phaser.Scene {
         this.imgGameOver = this.add.sprite(400, -400, "finishGame").setScale(.5)
 
         // Configuración del texto del puntaje final:
-        var textScore = this.add.text(320, 210, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' });
-        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true);
+        var textScore = this.add.text(320, 210, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
+        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
 
         // Intervalo que se encarga de actualizar el contador del puntaje:
         var puntajeFinal = 0
@@ -66,7 +66,7 @@ class JuegoTerminado extends Phaser.Scene {
 
         setTimeout(() => {
             
-            escena.start("Menu");
+            escena.start("Menu")
         }, 8000)
     }
 }

@@ -31,7 +31,7 @@ class SceneGame extends Phaser.Scene {
     this.load.image('pizzaMan5', 'Sprite-5.png')
     this.load.image('pizzaMan6', 'Sprite-6.png')
     this.load.image('pizzaMan7', 'Sprite-7.png')
-    this.load.image('pizzaMan8', 'Sprite-8.png');
+    this.load.image('pizzaMan8', 'Sprite-8.png')
 
     // Precarga de imágenes de la rata para generar la animación:
     this.load.image('rata1', 'Rata sprite 1.png')
@@ -223,13 +223,13 @@ class SceneGame extends Phaser.Scene {
         })
 
         // Creación de controles del teclado: 
-        this.cursors = this.input.keyboard.createCursorKeys();
+        this.cursors = this.input.keyboard.createCursorKeys()
 
         // Eventos controlar la animación del pizzaMan con la flecha "arriba" del teclado,
         // tanto cuando se aprieta como cuando se suelta:
         this.input.keyboard.on("keyup_UP", () => {
 
-            this.pizzaMan.anims.restart();
+            this.pizzaMan.anims.restart()
             this.pizzaMan.anims.stop("pizzaManWalk")
         })
 
@@ -376,9 +376,9 @@ class SceneGame extends Phaser.Scene {
             // Vuelven a aparecer los ingredientes una vez que se juntaron todos:
             this.grupoIngredientes.children.iterate(function (child) {
 
-                child.enableBody(true, child.x, child.y, true, true);
+                child.enableBody(true, child.x, child.y, true, true)
     
-            });
+            })
         }
 
         // Variable "stopVelocity" que controla que no se ejecute más el código que no se necesita al perder:
@@ -401,7 +401,12 @@ class SceneGame extends Phaser.Scene {
                 // Fórmula para calcular el vector de dirección del pizzaMan:
                 this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
 
-                // Variable "playMusic" para controlar que la música se reproduzca una sola vez:
+                // Variable "playMusic" para controlar que la música se reproduzca una sola vez.
+                // La música se activa solo cuando se aprieta el cursor UP. Tuve que forzarla de esa manera
+                // porque no arrancaba siempre que cargaba la escena. Hay un bug con la música que todavía no pude
+                // solucionar y lo hace cuando, estando en la escena de game over, minimizamos o cambiamos la ventana
+                // del navegador por unos segundos y al volver a la ventana del juego la música sigue sonando en vez de parar
+                // al cargar la escena del menú, lo que hace que se pisen las pistas al cargar la escena del juego.
                 if(playMusic){
 
                     music.play()
@@ -414,52 +419,52 @@ class SceneGame extends Phaser.Scene {
         // Lógica para hacer que las ratas se den vuelta:
         if(this.rata1.y == 150){
 
-            this.rata1.flipY = true;
+            this.rata1.flipY = true
         }
 
         else if(this.rata1.y == 460){
 
-            this.rata1.flipY = false;
+            this.rata1.flipY = false
         }
 
         if(this.rata2.y == 150){
 
-            this.rata2.flipY = true;
+            this.rata2.flipY = true
         }
 
         else if(this.rata2.y == 460){
 
-            this.rata2.flipY = false;
+            this.rata2.flipY = false
         }
 
         if(this.rata3.y == 50){
 
-            this.rata3.flipY = true;
+            this.rata3.flipY = true
         }
 
         else if(this.rata3.y == 470){
 
-            this.rata3.flipY = false;
+            this.rata3.flipY = false
         }
 
         if(this.rata4.x == 770){
 
-            this.rata4.flipY = true;
+            this.rata4.flipY = true
         }
 
         else if(this.rata4.x == 40){
 
-            this.rata4.flipY = false;
+            this.rata4.flipY = false
         }
 
         if(this.rata5.x == 670){
 
-            this.rata5.flipY = true;
+            this.rata5.flipY = true
         }
 
         else if(this.rata5.x == 140){
 
-            this.rata5.flipY = false;
+            this.rata5.flipY = false
         }
 
     }

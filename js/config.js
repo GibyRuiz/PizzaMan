@@ -9,7 +9,7 @@ var config = {
     // Se inicia con la escena del menú y se crea la instancia de la escena de créditos:
     scene: [Menu, Creditos],
     physics: {
-        default: 'arcade',
+        default: "arcade",
         arcade: {
             debug: false,
             gravity: {
