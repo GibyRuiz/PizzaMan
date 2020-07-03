@@ -1,3 +1,5 @@
+// Escena de créditos:
+
 class Creditos extends Phaser.Scene {
 
     constructor()
@@ -7,24 +9,24 @@ class Creditos extends Phaser.Scene {
 
     preload(){
 
-    // precarga de imágenes para animar a los personajes:
-    this.load.image('rata1', 'Rata sprite 1.png');   
-    this.load.image('rata2', 'Rata sprite 2.png');   
-    this.load.image('rata3', 'Rata sprite 3.png');   
-    this.load.image('rata4', 'Rata sprite 4.png');   
-    this.load.image('rata5', 'Rata sprite 5.png');   
-    this.load.image('rata6', 'Rata sprite 6.png');   
+        // precarga de imágenes para animar a los personajes:
+        this.load.image('rata1', 'Rata sprite 1.png');   
+        this.load.image('rata2', 'Rata sprite 2.png');   
+        this.load.image('rata3', 'Rata sprite 3.png');   
+        this.load.image('rata4', 'Rata sprite 4.png');   
+        this.load.image('rata5', 'Rata sprite 5.png');   
+        this.load.image('rata6', 'Rata sprite 6.png');   
 
-    this.load.image('pizzaMan1', 'Sprite-1.png');
-    this.load.image('pizzaMan2', 'Sprite-2.png');
-    this.load.image('pizzaMan3', 'Sprite-3.png');
-    this.load.image('pizzaMan4', 'Sprite-4.png');
-    this.load.image('pizzaMan5', 'Sprite-5.png');
-    this.load.image('pizzaMan6', 'Sprite-6.png');
-    this.load.image('pizzaMan7', 'Sprite-7.png');
-    this.load.image('pizzaMan8', 'Sprite-8.png');   
+        this.load.image('pizzaMan1', 'Sprite-1.png');
+        this.load.image('pizzaMan2', 'Sprite-2.png');
+        this.load.image('pizzaMan3', 'Sprite-3.png');
+        this.load.image('pizzaMan4', 'Sprite-4.png');
+        this.load.image('pizzaMan5', 'Sprite-5.png');
+        this.load.image('pizzaMan6', 'Sprite-6.png');
+        this.load.image('pizzaMan7', 'Sprite-7.png');
+        this.load.image('pizzaMan8', 'Sprite-8.png');   
 
-    this.load.image('piso', 'pisotemporal.png');   
+        this.load.image('piso', 'pisotemporal.png');   
 
     }
 
@@ -125,7 +127,6 @@ class Creditos extends Phaser.Scene {
 
         // Giro del pizzaMan:
         this.pizzaMan.angle += 3
-
     }
 }
 

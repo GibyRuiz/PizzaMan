@@ -150,7 +150,9 @@ class Menu extends Phaser.Scene {
 
     update(){
 
-        // Creación de instancia del objeto SceneGame y carga de la escena del juego:
+        // Creación de instancia del objeto SceneGame y carga de la escena del juego. 
+        // La variable "startGame" impide que se cree mas de una instancia con el mismo nombre de la escena del juego
+        // cuando vuelve a cargar desde el menú:
         if(cambiaEscena){
             if(startGame){
             this.scene.add("SceneGame", new SceneGame)

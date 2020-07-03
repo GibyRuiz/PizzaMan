@@ -4,7 +4,7 @@ class SceneGame extends Phaser.Scene {
 
     constructor()
     {
-        super({key:"SceneGame"});
+        super({key:"SceneGame"})
     }
 
     preload ()
@@ -15,59 +15,59 @@ class SceneGame extends Phaser.Scene {
     this.load.audio('nooo', 'nooo.mp3' )
 
     // Precarga de vidas e ingredientes:
-    this.load.image('corazon', 'corazon.png');
-    this.load.image('ajo', 'ajo.png');
-    this.load.image('cebolla', 'cebolla.png');
-    this.load.image('harina', 'harina.png');
-    this.load.image('lata', 'lata.png');
-    this.load.image('queso', 'queso.png');
-    this.load.image('tomate', 'tomate.png');
+    this.load.image('corazon', 'corazon.png')
+    this.load.image('ajo', 'ajo.png')
+    this.load.image('cebolla', 'cebolla.png')
+    this.load.image('harina', 'harina.png')
+    this.load.image('lata', 'lata.png')
+    this.load.image('queso', 'queso.png')
+    this.load.image('tomate', 'tomate.png')
 
     // Precarga de imágenes del pizzaMan para generar la animación:
-    this.load.image('pizzaMan1', 'Sprite-1.png');
-    this.load.image('pizzaMan2', 'Sprite-2.png');
-    this.load.image('pizzaMan3', 'Sprite-3.png');
-    this.load.image('pizzaMan4', 'Sprite-4.png');
-    this.load.image('pizzaMan5', 'Sprite-5.png');
-    this.load.image('pizzaMan6', 'Sprite-6.png');
-    this.load.image('pizzaMan7', 'Sprite-7.png');
-    this.load.image('pizzaMan8', 'Sprite-8.png'); 
+    this.load.image('pizzaMan1', 'Sprite-1.png')
+    this.load.image('pizzaMan2', 'Sprite-2.png')
+    this.load.image('pizzaMan3', 'Sprite-3.png')
+    this.load.image('pizzaMan4', 'Sprite-4.png')
+    this.load.image('pizzaMan5', 'Sprite-5.png')
+    this.load.image('pizzaMan6', 'Sprite-6.png')
+    this.load.image('pizzaMan7', 'Sprite-7.png')
+    this.load.image('pizzaMan8', 'Sprite-8.png');
 
     // Precarga de imágenes de la rata para generar la animación:
-    this.load.image('rata1', 'Rata sprite 1.png');   
-    this.load.image('rata2', 'Rata sprite 2.png');   
-    this.load.image('rata3', 'Rata sprite 3.png');   
-    this.load.image('rata4', 'Rata sprite 4.png');   
-    this.load.image('rata5', 'Rata sprite 5.png');   
-    this.load.image('rata6', 'Rata sprite 6.png');   
+    this.load.image('rata1', 'Rata sprite 1.png')
+    this.load.image('rata2', 'Rata sprite 2.png') 
+    this.load.image('rata3', 'Rata sprite 3.png')  
+    this.load.image('rata4', 'Rata sprite 4.png')   
+    this.load.image('rata5', 'Rata sprite 5.png')   
+    this.load.image('rata6', 'Rata sprite 6.png')   
 
     // Precarga de los sprites de la cocina:
-    this.load.image('horno', 'horno1.png');   
-    this.load.image('hornoMesa', 'hornoymesa2.png');  
-    this.load.image('mesa1', 'mesa1.png');   
-    this.load.image('mesa2', 'mesa2.png');   
-    this.load.image('mesa3', 'mesa3.png');   
-    this.load.image('mesa4', 'mesa4.png');   
-    this.load.image('mesaGrande', 'mesagrande.png');   
-    this.load.image('mesaMadera1', 'mesamadera1.png');   
-    this.load.image('mesaMadera2', 'mesamadera2.png');   
-    this.load.image('piso', 'pisotemporal.png');   
+    this.load.image('horno', 'horno1.png')  
+    this.load.image('hornoMesa', 'hornoymesa2.png')  
+    this.load.image('mesa1', 'mesa1.png') 
+    this.load.image('mesa2', 'mesa2.png')   
+    this.load.image('mesa3', 'mesa3.png')  
+    this.load.image('mesa4', 'mesa4.png')  
+    this.load.image('mesaGrande', 'mesagrande.png')   
+    this.load.image('mesaMadera1', 'mesamadera1.png')   
+    this.load.image('mesaMadera2', 'mesamadera2.png')   
+    this.load.image('piso', 'pisotemporal.png')   
 
 }
 
     create ()
     {
         // Variables que recuperan los valores que necesitan al inicio de la escena:
-        stopVelocity = true;
-        vidas = 3;
-        playMusic = true;
-        iniciaGameOver = true;
-        puntos = 0;
+        stopVelocity = true
+        vidas = 3
+        playMusic = true
+        iniciaGameOver = true
+        puntos = 0
 
         // Adición de sonidos:
-        var mama = this.sound.add('mama');
-        var yuhu = this.sound.add('yuhu');
-        this.noo = this.sound.add('nooo');
+        var mama = this.sound.add('mama')
+        var yuhu = this.sound.add('yuhu')
+        this.noo = this.sound.add('nooo')
 
         // Configuración de sonidos:
         yuhu.detune = 400
@@ -81,19 +81,19 @@ class SceneGame extends Phaser.Scene {
         this.add.image(665, 0, "piso").setOrigin(0)
 
         // Creación de grupo de elementos de la cocina:
-        this.grupoCocina = this.physics.add.staticGroup();
-        this.grupoCocina.create(700, 50, 'mesa3');
-        this.grupoCocina.create(374, 60, 'mesa1');
-        this.grupoCocina.create(699, 550, 'mesa2');
-        this.grupoCocina.create(749, 152, 'mesa4');
-        this.grupoCocina.create(320, 328, 'mesaGrande');
-        this.grupoCocina.create(50, 100, 'mesaMadera1');
-        this.grupoCocina.create(50, 550, 'mesaMadera2');
-        this.grupoCocina.create(750, 338, 'horno');
+        this.grupoCocina = this.physics.add.staticGroup()
+        this.grupoCocina.create(700, 50, 'mesa3')
+        this.grupoCocina.create(374, 60, 'mesa1')
+        this.grupoCocina.create(699, 550, 'mesa2')
+        this.grupoCocina.create(749, 152, 'mesa4')
+        this.grupoCocina.create(320, 328, 'mesaGrande')
+        this.grupoCocina.create(50, 100, 'mesaMadera1')
+        this.grupoCocina.create(50, 550, 'mesaMadera2')
+        this.grupoCocina.create(750, 338, 'horno')
         this.grupoCocina.create(340, 550, 'hornoMesa')
 
         // Creación de grupo de ingredientes:
-        this.grupoIngredientes = this.physics.add.group();
+        this.grupoIngredientes = this.physics.add.group()
         this.grupoIngredientes.create(750, 250, "tomate").setScale(1.3)
         this.grupoIngredientes.create(750, 450, "cebolla").setScale(1.4)
         this.grupoIngredientes.create(140, 560, "ajo").setScale(1.4)
@@ -107,9 +107,24 @@ class SceneGame extends Phaser.Scene {
         this.grupoIngredientes.create(260, 40, "harina").setScale(1.4)
         this.grupoIngredientes.create(400, 200, "cebolla").setScale(1.4)
 
+        // Animación de las ratas:
+        this.anims.create({
+            key: 'rataWalk',
+            frames: [
+                { key: 'rata1' },
+                { key: 'rata2' },
+                { key: 'rata3' },
+                { key: 'rata4' },
+                { key: 'rata5' },
+                { key: 'rata6' },
+                
+            ],
+            frameRate: 15,
+            repeat: -1
+        })
 
         // Creación de grupo de ratas:
-        this.ratas = this.physics.add.group();
+        this.ratas = this.physics.add.group()
         this.rata1 = this.ratas.create(450, 460, 'rata1').play("rataWalk")
         this.rata2 = this.ratas.create(620, 460, 'rata1').play("rataWalk")
         this.rata3 = this.ratas.create(200, 50, 'rata1').play("rataWalk")
@@ -118,13 +133,26 @@ class SceneGame extends Phaser.Scene {
         this.rata5 = this.ratas.create(140, 180, 'rata1').play("rataWalk")
         this.rata5.setSize(60, 25).angle = 90
 
+        // Creación de grupo de corazones:
+        var corazones = this.add.group({
+            key: 'corazon',
+            repeat: 2,
+            setXY:
+            {
+                x: 622,
+                y: 35,
+                stepX: 39
+            },
+            setScale: { x: .25, y: .25 }
+        })
+
         // Carga y configuración del sprite del pizzaMan:
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
         this.pizzaMan.setCircle(17, 12, 15)  
         
         // Carga y configuración del texto de puntaje:
-        var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' });
-        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true);
+        var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
+        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
 
 
         // Animación del pizzaMan:
@@ -143,24 +171,7 @@ class SceneGame extends Phaser.Scene {
             ],
             frameRate: 23,
             repeat: -1
-        });
-
-
-        // Animación de las ratas:
-        this.anims.create({
-            key: 'rataWalk',
-            frames: [
-                { key: 'rata1' },
-                { key: 'rata2' },
-                { key: 'rata3' },
-                { key: 'rata4' },
-                { key: 'rata5' },
-                { key: 'rata6' },
-                
-            ],
-            frameRate: 15,
-            repeat: -1
-        });
+        })
 
 
         // Tweens de las ratas para que vayan de un punto a otro y vuelvan:
@@ -219,106 +230,101 @@ class SceneGame extends Phaser.Scene {
         this.input.keyboard.on("keyup_UP", () => {
 
             this.pizzaMan.anims.restart();
-            this.pizzaMan.anims.stop("pizzaManWalk");
+            this.pizzaMan.anims.stop("pizzaManWalk")
         })
 
         this.input.keyboard.on("keydown_UP", () => {
 
             if(stopVelocity == true){
 
-                this.pizzaMan.anims.play("pizzaManWalk");
+                this.pizzaMan.anims.play("pizzaManWalk")
 
             }
             else{
 
-                this.pizzaMan.anims.stop("pizzaManWalk");
+                this.pizzaMan.anims.stop("pizzaManWalk")
             }
         })
         
 
-        
-        this.physics.add.collider(this.pizzaMan, this.grupoCocina);
+        // Colisión entre el pizzaMan y los elementos de la cocina:
+        this.physics.add.collider(this.pizzaMan, this.grupoCocina)
 
+        // Colisión entre el pizzaMan y los ingredienes:
         this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
-            ing.disableBody(true, true);
+            ing.disableBody(true, true)
             puntos++
             textScore.setText("SCORE: " + puntos)
             yuhu.play()
-             } );
+            } )
 
-        this.physics.add.overlap(this.pizzaMan, this.ratas, chocaRatas);
+        // Colisión entre el pizzaMan y las ratas:
+        this.physics.add.overlap(this.pizzaMan, this.ratas, chocaRatas)
 
-        var corazones = this.add.group({
-            key: 'corazon',
-            repeat: 2,
-            setXY:
-            {
-                x: 622,
-                y: 35,
-                stepX: 39
-            },
-            setScale: { x: .25, y: .25 }
-            
-    
-        });
-
-        
-
+        // Función que se llama cuando el personaje choca con una rata:
         var pizzaMan = this.pizzaMan
-
         function chocaRatas(){
-            if(vidas > 0){
-            mama.play()
-            }
             
-            if(controlaAlfa){
+            // La variable "controlaAlfa" controla que no se ejecute denuevo el código de la función hasta que no haya
+            // terminado de ejecutarse por completo
+            if(controlaAlfa){                
+                   
                 controlaAlfa = false
+
                 if(vidas > 0){
-            setTimeout(() => {
-                pizzaMan.setAlpha(0.4)
-                pizzaMan.setTint(0xff0000)
-            }, 150)
-            
-            setTimeout(() => {
-                pizzaMan.setAlpha(1)
-                pizzaMan.clearTint()
-            }, 250)
-            setTimeout(() => {
-                pizzaMan.setAlpha(0.4)
-                pizzaMan.setTint(0xff0000)
-            }, 350)
-            setTimeout(() => {
-                pizzaMan.setAlpha(1)
-                pizzaMan.clearTint()
-            }, 450)
-        }
+                    
+                    // Suena el mama mia! cada vez que chocamos una rata:
+                    mama.play()
+
+                setTimeout(() => {
+                    pizzaMan.setAlpha(0.4)
+                    pizzaMan.setTint(0xff0000)
+                }, 150)
+                
+                setTimeout(() => {
+                    pizzaMan.setAlpha(1)
+                    pizzaMan.clearTint()
+                }, 250)
+
+                setTimeout(() => {
+                    pizzaMan.setAlpha(0.4)
+                    pizzaMan.setTint(0xff0000)
+                }, 350)
+
+                setTimeout(() => {
+                    pizzaMan.setAlpha(1)
+                    pizzaMan.clearTint()
+                }, 450)
+            }
 
             setTimeout(() => {
                
                vidas--
+
                if(vidas > -1){
-               var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
-               if(arrCorazones !== undefined){
-               arrCorazones.destroy()
+                // Se quita un corazón cada vez que se choca con una rata:
+                    var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
+
+                    if(arrCorazones !== undefined){
+                    arrCorazones.destroy()
+                    }
                }
-               }
+
                controlaAlfa = true
             }, 750)
         }
 
-        
-
     }   
-
 
 }
     
 
     update(){
 
-        
-        Phaser.Actions.Rotate(this.grupoIngredientes.getChildren(), .05);
+        // Rotación de los ingredientes:
+        Phaser.Actions.Rotate(this.grupoIngredientes.getChildren(), .05)
 
+        // Se prepara para lanzar la escena de game over:
         if(vidas == 0){
             
             stopVelocity = false
@@ -331,10 +337,12 @@ class SceneGame extends Phaser.Scene {
             this.noo.volume = 2
             this.noo.play()
 
+            // Se prepara el puntaje que va a aparecer en la escena de game over como "best":
             if(puntos > puntajeGlobal){
 
             puntajeGlobal = puntos }
 
+            // Se dispara la escena de game over:
             var escena = this.scene
             
             setTimeout(() => {
@@ -347,22 +355,25 @@ class SceneGame extends Phaser.Scene {
 
                 if(iniciaGameOver){
                     escena.start("JuegoTerminado")
-                    iniciaGameOver = false;
+                    iniciaGameOver = false
                 }
                 
             }, 1000)
 
         }
 
+        // Se detiene el personaje acá tambien por las dudas:
         this.pizzaMan.setVelocity(0)
 
+        // Las ratas van mas rápido cuando se juntan todos los ingredientes:
         if (this.grupoIngredientes.countActive(true) === 0){
-            this.tweenRata1.timeScale +=.2;
-            this.tweenRata2.timeScale +=.2;
-            this.tweenRata3.timeScale +=.2;
-            this.tweenRata4.timeScale +=.2;
-            this.tweenRata5.timeScale +=.2;
+            this.tweenRata1.timeScale +=.2
+            this.tweenRata2.timeScale +=.2
+            this.tweenRata3.timeScale +=.2
+            this.tweenRata4.timeScale +=.2
+            this.tweenRata5.timeScale +=.2
 
+            // Vuelven a aparecer los ingredientes una vez que se juntaron todos:
             this.grupoIngredientes.children.iterate(function (child) {
 
                 child.enableBody(true, child.x, child.y, true, true);
