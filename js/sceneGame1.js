@@ -222,6 +222,7 @@ class SceneGame extends Phaser.Scene {
             ease: 'linear'
         })
 
+
         // Creación de controles del teclado: 
         this.cursors = this.input.keyboard.createCursorKeys()
 
