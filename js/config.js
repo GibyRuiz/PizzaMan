@@ -5,10 +5,10 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    backgroundColor: "#ffff00",
+    backgroundColor: "#ffffff",
     // Se inicia con la escena del menú y se crea la instancia de la escena de créditos:
-    // scene: [Menu, Creditos],
-    scene: [SegundoNivel],
+    scene: [Menu, Creditos],
+    // scene: [SegundoNivel],
     physics: {
         default: "arcade",
         arcade: {

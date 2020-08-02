@@ -151,8 +151,8 @@ class SceneGame extends Phaser.Scene {
         this.pizzaMan.setCircle(17, 12, 15)  
         
         // Carga y configuración del texto de puntaje:
-        var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
-        textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
+        // var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
+        // textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
 
 
         // Animación del pizzaMan:
@@ -177,7 +177,7 @@ class SceneGame extends Phaser.Scene {
         // Tweens de las ratas para que vayan de un punto a otro y vuelvan:
         this.tweenRata1 = this.tweens.add({
             targets: this.rata1,
-            duration:2000,
+            duration:4000,
             y: 150,
             repeat: -1,
             yoyo: true,
@@ -187,7 +187,7 @@ class SceneGame extends Phaser.Scene {
 
         this.tweenRata2 = this.tweens.add({
             targets: this.rata2,
-            duration:2000,
+            duration:4000,
             y: 150,
             repeat: -1,
             yoyo: true,
@@ -197,7 +197,7 @@ class SceneGame extends Phaser.Scene {
 
         this.tweenRata3 = this.tweens.add({
             targets: this.rata3,
-            duration:2000,
+            duration:4000,
             y: 470,
             repeat: -1,
             yoyo: true,
@@ -206,7 +206,7 @@ class SceneGame extends Phaser.Scene {
 
         this.tweenRata4 = this.tweens.add({
             targets: this.rata4,
-            duration:3000,
+            duration:4000,
             x: 770,
             repeat: -1,
             yoyo: true,
@@ -215,11 +215,12 @@ class SceneGame extends Phaser.Scene {
 
         this.tweenRata5 =this.tweens.add({
             targets: this.rata5,
-            duration:2000,
+            duration:4000,
             x: 670,
             repeat: -1,
             yoyo: true,
-            ease: 'linear'
+            ease: 'linear',
+            delay: 2000
         })
 
 
@@ -254,8 +255,8 @@ class SceneGame extends Phaser.Scene {
         // Colisión entre el pizzaMan y los ingredienes:
         this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
             ing.disableBody(true, true)
-            puntos++
-            textScore.setText("SCORE: " + puntos)
+            // puntos++
+            // textScore.setText("SCORE: " + puntos)
             yuhu.play()
             } )
 
@@ -367,20 +368,20 @@ class SceneGame extends Phaser.Scene {
         this.pizzaMan.setVelocity(0)
 
         // Las ratas van mas rápido cuando se juntan todos los ingredientes:
-        if (this.grupoIngredientes.countActive(true) === 0){
-            this.tweenRata1.timeScale +=.2
-            this.tweenRata2.timeScale +=.2
-            this.tweenRata3.timeScale +=.2
-            this.tweenRata4.timeScale +=.2
-            this.tweenRata5.timeScale +=.2
+        // if (this.grupoIngredientes.countActive(true) === 0){
+        //     this.tweenRata1.timeScale +=.2
+        //     this.tweenRata2.timeScale +=.2
+        //     this.tweenRata3.timeScale +=.2
+        //     this.tweenRata4.timeScale +=.2
+        //     this.tweenRata5.timeScale +=.2
 
             // Vuelven a aparecer los ingredientes una vez que se juntaron todos:
-            this.grupoIngredientes.children.iterate(function (child) {
+            // this.grupoIngredientes.children.iterate(function (child) {
 
-                child.enableBody(true, child.x, child.y, true, true)
+            //     child.enableBody(true, child.x, child.y, true, true)
     
-            })
-        }
+            // })
+        // }
 
         // Variable "stopVelocity" que controla que no se ejecute más el código que no se necesita al perder:
         if(stopVelocity){

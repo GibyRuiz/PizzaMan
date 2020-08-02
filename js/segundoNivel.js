@@ -76,6 +76,13 @@
                 this.load.image('pizzaMan6', 'Sprite-6.png')
                 this.load.image('pizzaMan7', 'Sprite-7.png')
                 this.load.image('pizzaMan8', 'Sprite-8.png')
+
+                this.load.image('ajo', 'ajo.png')
+                this.load.image('cebolla', 'cebolla.png')
+                this.load.image('harina', 'harina.png')
+                this.load.image('lata', 'lata.png')
+                this.load.image('queso', 'queso.png')
+                this.load.image('tomate', 'tomate.png')
         }
 
         create(){
@@ -106,6 +113,33 @@
                 this.grupoCocina.create(1180, 130, 'mesaMadera2')
                 this.grupoCocina.create(1388, 550, 'hornoMesa')
                 this.grupoCocina.create(1050, 398, 'mesaMadera1')
+
+                this.grupoIngredientes = this.physics.add.group()
+                this.grupoIngredientes.create(750, 250, "tomate").setScale(1.3)
+                this.grupoIngredientes.create(750, 450, "cebolla").setScale(1.4)
+                this.grupoIngredientes.create(140, 560, "ajo").setScale(1.4)
+                this.grupoIngredientes.create(550, 560, "queso").setScale(1.5)
+                this.grupoIngredientes.create(650, 150, "lata").setScale(1.4)
+                this.grupoIngredientes.create(530, 60, "harina").setScale(1.4)
+                this.grupoIngredientes.create(145, 40, "tomate").setScale(1.3)
+                this.grupoIngredientes.create(50, 450, "lata").setScale(1.4)
+                this.grupoIngredientes.create(500, 300, "ajo").setScale(1.4)
+                this.grupoIngredientes.create(195, 350, "queso").setScale(1.5)
+                this.grupoIngredientes.create(260, 40, "harina").setScale(1.4)
+                this.grupoIngredientes.create(400, 200, "cebolla").setScale(1.4)
+
+                this.grupoIngredientes.create(-700, 250, "tomate").setScale(1.3)
+                this.grupoIngredientes.create(-600, 450, "cebolla").setScale(1.4)
+                this.grupoIngredientes.create(-140, 560, "ajo").setScale(1.4)
+                this.grupoIngredientes.create(-550, 560, "queso").setScale(1.5)
+                this.grupoIngredientes.create(-650, 50, "lata").setScale(1.4)
+                this.grupoIngredientes.create(1000, 40, "harina").setScale(1.4)
+                this.grupoIngredientes.create(1195, 40, "tomate").setScale(1.3)
+                this.grupoIngredientes.create(1250, 450, "lata").setScale(1.4)
+                this.grupoIngredientes.create(1350, 300, "ajo").setScale(1.4)
+                this.grupoIngredientes.create(1195, 350, "queso").setScale(1.5)
+                this.grupoIngredientes.create(1160, 540, "harina").setScale(1.4)
+                this.grupoIngredientes.create(-300, 50, "cebolla").setScale(1.4)
 
                 this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
                 this.pizzaMan.setCircle(17, 12, 15) 
@@ -156,6 +190,10 @@
                             this.pizzaMan.anims.stop("pizzaManWalk")
                         }
                 })
+
+                this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
+                        ing.disableBody(true, true)
+                } )
 
         }
 
