@@ -60,7 +60,7 @@ class SceneGame extends Phaser.Scene {
         // Variables que recuperan los valores que necesitan al inicio de la escena:
         stopVelocity = true
         vidas = 3
-        playMusic = true
+        // playMusic = true
         iniciaGameOver = true
         puntos = 0
 
@@ -74,8 +74,8 @@ class SceneGame extends Phaser.Scene {
         yuhu.volume = 3
         mama.detune = 1000
         this.mama = mama
-        music.detune = 200
-        this.sound.pauseOnBlur = false
+        // music.detune = 200
+        // this.sound.pauseOnBlur = false
         
         this.add.image(0, 0, "piso").setOrigin(0)
         this.add.image(665, 0, "piso").setOrigin(0)
@@ -409,11 +409,11 @@ class SceneGame extends Phaser.Scene {
                 // solucionar y lo hace cuando, estando en la escena de game over, minimizamos o cambiamos la ventana
                 // del navegador por unos segundos y al volver a la ventana del juego la música sigue sonando en vez de parar
                 // al cargar la escena del menú, lo que hace que se pisen las pistas al cargar la escena del juego.
-                if(playMusic){
+                // if(playMusic){
 
-                    music.play()
-                    playMusic = false
-                }
+                //     music.play()
+                //     playMusic = false
+                // }
             }
 
         }

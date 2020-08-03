@@ -25,11 +25,11 @@ var config = {
 new Phaser.Game(config)
 
 // Variables globales:
-var playMusic
+// var playMusic
 var controlaAlfa = true
 var vidas
 var cambiaEscena = false
-var music
+// var music
 var stopVelocity
 var musicaPortada = true
 var puntos
