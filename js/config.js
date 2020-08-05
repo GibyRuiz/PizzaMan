@@ -38,3 +38,5 @@ var startGame = true
 var startGameOver = true
 var iniciaGameOver
 var puntajeGlobal = 0
+var angle = 0
+var dibujaCirculo = true

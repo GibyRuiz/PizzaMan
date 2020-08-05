@@ -63,6 +63,7 @@ class SceneGame extends Phaser.Scene {
         // playMusic = true
         iniciaGameOver = true
         puntos = 0
+        dibujaCirculo = true
 
         // Adición de sonidos:
         var mama = this.sound.add('mama')
@@ -145,6 +146,11 @@ class SceneGame extends Phaser.Scene {
             },
             setScale: { x: .25, y: .25 }
         })
+
+        this.circle = new Phaser.Geom.Circle(50, 300, 50);
+
+        this.graphics = this.add.graphics({ fillStyle: { color: 0xff0000 } });
+        this.graphics.fillCircleShape(this.circle);
 
         // Carga y configuración del sprite del pizzaMan:
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
@@ -323,6 +329,14 @@ class SceneGame extends Phaser.Scene {
 
     update(){
 
+        if(dibujaCirculo){
+
+            angle += 0.15
+            this.graphics.clear();
+            this.circle.radius = 50 - Math.cos(angle) * 5
+            this.graphics.fillCircleShape(this.circle);
+        }
+
         // Rotación de los ingredientes:
         Phaser.Actions.Rotate(this.grupoIngredientes.getChildren(), .05)
 
@@ -399,7 +413,10 @@ class SceneGame extends Phaser.Scene {
 
             // Controlador para hacer avanzar al pizzaMan:
             if (this.cursors.up.isDown )
+
             {
+                dibujaCirculo = false
+                this.graphics.clear();
                 // Fórmula para calcular el vector de dirección del pizzaMan:
                 this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
 
