@@ -16,6 +16,7 @@ class SceneGame extends Phaser.Scene {
 
     // Precarga de vidas e ingredientes:
     this.load.image('corazon', 'corazon.png')
+    this.load.image('porcion', 'pedazo de pizza .png')
     this.load.image('ajo', 'ajo.png')
     this.load.image('cebolla', 'cebolla.png')
     this.load.image('harina', 'harina.png')
@@ -40,6 +41,11 @@ class SceneGame extends Phaser.Scene {
     this.load.image('rata4', 'Rata sprite 4.png')   
     this.load.image('rata5', 'Rata sprite 5.png')   
     this.load.image('rata6', 'Rata sprite 6.png')   
+
+    this.load.image('rataAzul1', 'rata sprite azul 1 png.png')
+    this.load.image('rataAzul2', 'rata sprite azul 2 png.png') 
+    this.load.image('rataAzul3', 'rata sprite azul 3 png.png')  
+    this.load.image('rataAzul4', 'rata sprite azul 4 png.png')   
 
     // Precarga de los sprites de la cocina:
     this.load.image('horno', 'horno1.png')  
@@ -124,14 +130,27 @@ class SceneGame extends Phaser.Scene {
             repeat: -1
         })
 
+        this.anims.create({
+            key: 'rataAzulWalk',
+            frames: [
+                { key: 'rataAzul1' },
+                { key: 'rataAzul2' },
+                { key: 'rataAzul3' },
+                { key: 'rataAzul4' },
+                
+            ],
+            frameRate: 15,
+            repeat: -1
+        })
+
         // Creación de grupo de ratas:
         this.ratas = this.physics.add.group()
         this.rata1 = this.ratas.create(450, 460, 'rata1').play("rataWalk")
         this.rata2 = this.ratas.create(620, 460, 'rata1').play("rataWalk")
-        this.rata3 = this.ratas.create(200, 50, 'rata1').play("rataWalk")
+        this.rata3 = this.ratas.create(200, 50, 'rataAzul1').play("rataAzulWalk")
         this.rata4 = this.ratas.create(40, 480, 'rata1').play("rataWalk")
         this.rata4.setSize(60, 25).angle = 90
-        this.rata5 = this.ratas.create(140, 180, 'rata1').play("rataWalk")
+        this.rata5 = this.ratas.create(140, 180, 'rataAzul1').play("rataAzulWalk")
         this.rata5.setSize(60, 25).angle = 90
 
         // Creación de grupo de corazones:
@@ -155,6 +174,8 @@ class SceneGame extends Phaser.Scene {
         // Carga y configuración del sprite del pizzaMan:
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
         this.pizzaMan.setCircle(17, 12, 15)  
+
+        this.porcionPizza = this.add.image(680, 57, "porcion").setOrigin(0).setScale(.12)
         
         // Carga y configuración del texto de puntaje:
         // var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
