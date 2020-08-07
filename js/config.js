@@ -40,3 +40,4 @@ var iniciaGameOver
 var puntajeGlobal = 0
 var angle = 0
 var dibujaCirculo = true
+var incrementoTamañoPorcion = 0.12

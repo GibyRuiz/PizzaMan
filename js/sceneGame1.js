@@ -175,7 +175,8 @@ class SceneGame extends Phaser.Scene {
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
         this.pizzaMan.setCircle(17, 12, 15)  
 
-        this.porcionPizza = this.add.image(680, 57, "porcion").setOrigin(0).setScale(.12)
+        this.porcionPizza = this.add.image(680, 57, "porcion").setScale(.12)
+        this.porcionPizza.alpha = 0
         
         // Carga y configuración del texto de puntaje:
         // var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
@@ -282,6 +283,29 @@ class SceneGame extends Phaser.Scene {
         // Colisión entre el pizzaMan y los ingredienes:
         this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
             ing.disableBody(true, true)
+            this.porcionPizza.x = ing.x
+            this.porcionPizza.y = ing.y + 15
+            this.porcionPizza.alpha = .4
+
+            var intervalo1 = setInterval(() => {
+                incrementoTamañoPorcion += .013
+                this.porcionPizza.setScale(incrementoTamañoPorcion)
+
+                if(incrementoTamañoPorcion >= .6){
+
+                    this.porcionPizza.alpha = .2
+                }
+
+                if(incrementoTamañoPorcion >= .8){
+                    this.porcionPizza.alpha = 0
+                    incrementoTamañoPorcion = .12
+                    this.porcionPizza.setScale(incrementoTamañoPorcion)
+                    clearInterval(intervalo1)
+    
+                }
+
+            }, 1)
+
             // puntos++
             // textScore.setText("SCORE: " + puntos)
             yuhu.play()
