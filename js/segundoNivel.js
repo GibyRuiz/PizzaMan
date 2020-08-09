@@ -83,11 +83,21 @@
                 this.load.image('lata', 'lata.png')
                 this.load.image('queso', 'queso.png')
                 this.load.image('tomate', 'tomate.png')
+                this.load.image('porcion', 'pedazo de pizza .png')
+
+                this.load.audio('yuhu', 'wooHoo.mp3' )
+
+                this.load.image('corazon', 'corazon.png')
         }
 
         create(){
 
                 stopVelocity = true
+                dibujaCirculo = true
+
+                var yuhu = this.sound.add('yuhu')
+                yuhu.detune = 400
+                yuhu.volume = 3
 
                 this.add.image(0, 0, "piso").setOrigin(0)
                 this.add.image(740, 0, "piso").setOrigin(0)
@@ -141,6 +151,32 @@
                 this.grupoIngredientes.create(1160, 540, "harina").setScale(1.4)
                 this.grupoIngredientes.create(-300, 50, "cebolla").setScale(1.4)
 
+                var corazones = this.add.group({
+                        key: 'corazon',
+                        repeat: 2,
+                        setXY:
+                        {
+                            x: 672,
+                            y: 35,
+                            stepX: 39
+                        },
+                        setScale: { x: .25, y: .25 }
+                })
+
+                corazones.children.iterate(function (child) {
+
+                            child.setScrollFactor(0)
+                
+                        })
+
+                this.porcionPizza = this.add.image(680, 57, "porcion").setScale(.12)
+                this.porcionPizza.alpha = 0
+
+                this.circle = new Phaser.Geom.Circle(50, 300, 50);
+
+                this.graphics = this.add.graphics({ fillStyle: { color: 0xee0000 } });
+                this.graphics.fillCircleShape(this.circle);
+
                 this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
                 this.pizzaMan.setCircle(17, 12, 15) 
 
@@ -192,14 +228,46 @@
                 })
 
                 this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
+
+                        yuhu.play()
+
                         ing.disableBody(true, true)
-                } )
+                        this.porcionPizza.x = ing.x
+                        this.porcionPizza.y = ing.y + 15
+                        this.porcionPizza.alpha = .4
+
+                        var intervalo1 = setInterval(() => {
+                        incrementoTamañoPorcion += .013
+                        this.porcionPizza.setScale(incrementoTamañoPorcion)
+
+                        if(incrementoTamañoPorcion >= .6){
+
+                                this.porcionPizza.alpha = .2
+                        }
+
+                        if(incrementoTamañoPorcion >= .8){
+
+                                this.porcionPizza.alpha = 0
+                                incrementoTamañoPorcion = .12
+                                this.porcionPizza.setScale(incrementoTamañoPorcion)
+                                clearInterval(intervalo1)
+                        }
+
+                        }, 1)} )
 
         }
 
         update(){
 
                 this.pizzaMan.setVelocity(0)
+
+                if(dibujaCirculo){
+
+                        angle += 0.15
+                        this.graphics.clear();
+                        this.circle.radius = 50 - Math.cos(angle) * 5
+                        this.graphics.fillCircleShape(this.circle);
+                }
 
 
                 if(stopVelocity){
@@ -216,6 +284,8 @@
 
                         if (this.cursors.up.isDown )
                         {
+                                dibujaCirculo = false
+                                this.graphics.clear();
                                 this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
                         }
                 }
