@@ -88,6 +88,8 @@
                 this.load.audio('yuhu', 'wooHoo.mp3' )
 
                 this.load.image('corazon', 'corazon.png')
+
+                this.load.image('pizza', 'pizza completa.png')
         }
 
         create(){
@@ -172,13 +174,25 @@
                 this.porcionPizza = this.add.image(680, 57, "porcion").setScale(.12)
                 this.porcionPizza.alpha = 0
 
-                this.circle = new Phaser.Geom.Circle(50, 300, 50);
+                this.circle = new Phaser.Geom.Circle(50, 300, 50)
+                this.triangleTop = new Phaser.Geom.Triangle.BuildEquilateral(53, 220, 30)
+                this.triangleBottom = new Phaser.Geom.Triangle.BuildEquilateral(53, 340, 30)
+                this.triangleRight = new Phaser.Geom.Triangle.BuildEquilateral(115, 287, 30)
+                this.triangleLeft = new Phaser.Geom.Triangle.BuildEquilateral(-17, 287, 30)
 
-                this.graphics = this.add.graphics({ fillStyle: { color: 0xee0000 } });
-                this.graphics.fillCircleShape(this.circle);
+                Phaser.Geom.Triangle.Rotate(this.triangleBottom, 1.035)
+                Phaser.Geom.Triangle.Rotate(this.triangleRight, -.5)
+                Phaser.Geom.Triangle.Rotate(this.triangleLeft, .5)
+
+
+                this.graphics = this.add.graphics({ fillStyle: { color: 0xee0000 } })
 
                 this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
                 this.pizzaMan.setCircle(17, 12, 15) 
+
+                this.pizza = this.add.image(400, 300, "pizza").setScale(.1)
+                this.pizza.alpha = 0
+                this.pizza.setScrollFactor(0)
 
                 // this.cameras.main.setZoom(.34)
                 this.cameras.main.startFollow(this.pizzaMan)
@@ -261,12 +275,31 @@
 
                 this.pizzaMan.setVelocity(0)
 
+                if (this.grupoIngredientes.countActive(true) === 0){
+
+                        this.pizza.alpha = 1
+            
+                        if(incrementoTamañoPizza <= .7){
+            
+                            this.pizza.setScale(incrementoTamañoPizza += .02)
+                        }
+                }
+
                 if(dibujaCirculo){
 
                         angle += 0.15
                         this.graphics.clear();
-                        this.circle.radius = 50 - Math.cos(angle) * 5
-                        this.graphics.fillCircleShape(this.circle);
+                        this.circle.radius = 50 - Math.cos(angle) * 3
+                        this.triangleTop.top = 205 - Math.cos(angle) * 15
+                        this.triangleBottom.top = 370 + Math.cos(angle) * 15
+                        this.triangleRight.left = 120 + Math.cos(angle) * 15
+                        this.triangleLeft.left = -45 - Math.cos(angle) * 15
+                        this.graphics.fillCircleShape(this.circle)
+                        this.graphics.fillTriangleShape(this.triangleTop)
+                        this.graphics.fillTriangleShape(this.triangleBottom)
+                        this.graphics.fillTriangleShape(this.triangleRight)
+                        this.graphics.fillTriangleShape(this.triangleLeft)
+
                 }
 
 

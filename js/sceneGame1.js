@@ -24,6 +24,8 @@ class SceneGame extends Phaser.Scene {
     this.load.image('queso', 'queso.png')
     this.load.image('tomate', 'tomate.png')
 
+    this.load.image('pizza', 'pizza completa.png')
+
     // Precarga de imágenes del pizzaMan para generar la animación:
     this.load.image('pizzaMan1', 'Sprite-1.png')
     this.load.image('pizzaMan2', 'Sprite-2.png')
@@ -169,7 +171,14 @@ class SceneGame extends Phaser.Scene {
         this.circle = new Phaser.Geom.Circle(50, 300, 50);
 
         this.graphics = this.add.graphics({ fillStyle: { color: 0xff0000 } });
-        this.graphics.fillCircleShape(this.circle);
+        this.triangleTop = new Phaser.Geom.Triangle.BuildEquilateral(53, 220, 30)
+        this.triangleBottom = new Phaser.Geom.Triangle.BuildEquilateral(53, 340, 30)
+        this.triangleRight = new Phaser.Geom.Triangle.BuildEquilateral(115, 287, 30)
+        this.triangleLeft = new Phaser.Geom.Triangle.BuildEquilateral(-17, 287, 30)
+
+        Phaser.Geom.Triangle.Rotate(this.triangleBottom, 1.035)
+        Phaser.Geom.Triangle.Rotate(this.triangleRight, -.5)
+        Phaser.Geom.Triangle.Rotate(this.triangleLeft, .5)
 
         // Carga y configuración del sprite del pizzaMan:
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
@@ -177,6 +186,9 @@ class SceneGame extends Phaser.Scene {
 
         this.porcionPizza = this.add.image(680, 57, "porcion").setScale(.12)
         this.porcionPizza.alpha = 0
+
+        this.pizza = this.add.image(400, 300, "pizza").setScale(.1)
+        this.pizza.alpha = 0
         
         // Carga y configuración del texto de puntaje:
         // var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
@@ -282,6 +294,7 @@ class SceneGame extends Phaser.Scene {
 
         // Colisión entre el pizzaMan y los ingredienes:
         this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
+
             ing.disableBody(true, true)
             this.porcionPizza.x = ing.x
             this.porcionPizza.y = ing.y + 15
@@ -316,10 +329,12 @@ class SceneGame extends Phaser.Scene {
 
         // Función que se llama cuando el personaje choca con una rata:
         var pizzaMan = this.pizzaMan
+
         function chocaRatas(){
             
             // La variable "controlaAlfa" controla que no se ejecute denuevo el código de la función hasta que no haya
             // terminado de ejecutarse por completo
+            
             if(controlaAlfa){                
                    
                 controlaAlfa = false
@@ -380,6 +395,14 @@ class SceneGame extends Phaser.Scene {
             this.graphics.clear();
             this.circle.radius = 50 - Math.cos(angle) * 5
             this.graphics.fillCircleShape(this.circle);
+            this.triangleTop.top = 205 - Math.cos(angle) * 15
+            this.triangleBottom.top = 370 + Math.cos(angle) * 15
+            this.triangleRight.left = 120 + Math.cos(angle) * 15
+            this.triangleLeft.left = -45 - Math.cos(angle) * 15
+            this.graphics.fillTriangleShape(this.triangleTop)
+            this.graphics.fillTriangleShape(this.triangleBottom)
+            this.graphics.fillTriangleShape(this.triangleRight)
+            this.graphics.fillTriangleShape(this.triangleLeft)
         }
 
         // Rotación de los ingredientes:
@@ -426,8 +449,14 @@ class SceneGame extends Phaser.Scene {
         // Se detiene el personaje acá tambien por las dudas:
         this.pizzaMan.setVelocity(0)
 
-        // Las ratas van mas rápido cuando se juntan todos los ingredientes:
-        // if (this.grupoIngredientes.countActive(true) === 0){
+        if (this.grupoIngredientes.countActive(true) === 0){
+
+            this.pizza.alpha = 1
+
+            if(incrementoTamañoPizza <= .7){
+
+                this.pizza.setScale(incrementoTamañoPizza += .02)
+            }
         //     this.tweenRata1.timeScale +=.2
         //     this.tweenRata2.timeScale +=.2
         //     this.tweenRata3.timeScale +=.2
@@ -440,7 +469,7 @@ class SceneGame extends Phaser.Scene {
             //     child.enableBody(true, child.x, child.y, true, true)
     
             // })
-        // }
+        }
 
         // Variable "stopVelocity" que controla que no se ejecute más el código que no se necesita al perder:
         if(stopVelocity){

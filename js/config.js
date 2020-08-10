@@ -7,8 +7,8 @@ var config = {
     height: 600,
     backgroundColor: "#ffffff",
     // Se inicia con la escena del menú y se crea la instancia de la escena de créditos:
-    // scene: [Menu, Creditos],
-    scene: [SegundoNivel],
+    scene: [Menu, Creditos],
+    // scene: [SegundoNivel],
     physics: {
         default: "arcade",
         arcade: {
@@ -41,3 +41,4 @@ var puntajeGlobal = 0
 var angle = 0
 var dibujaCirculo = true
 var incrementoTamañoPorcion = 0.12
+var incrementoTamañoPizza = .1
