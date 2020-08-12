@@ -90,9 +90,28 @@
                 this.load.image('corazon', 'corazon.png')
 
                 this.load.image('pizza', 'pizza completa.png')
+
+                this.load.image('rata1', 'Rata sprite 1.png')
+                this.load.image('rata2', 'Rata sprite 2.png') 
+                this.load.image('rata3', 'Rata sprite 3.png')  
+                this.load.image('rata4', 'Rata sprite 4.png')   
+                this.load.image('rata5', 'Rata sprite 5.png')   
+                this.load.image('rata6', 'Rata sprite 6.png')   
+
+                this.load.image('rataAzul1', 'rata sprite azul 1 png.png')
+                this.load.image('rataAzul2', 'rata sprite azul 2 png.png') 
+                this.load.image('rataAzul3', 'rata sprite azul 3 png.png')  
+                this.load.image('rataAzul4', 'rata sprite azul 4 png.png') 
+
+                this.load.image('cucaracha1', 'cucaracha sprite 1.png')   
+                this.load.image('cucaracha2', 'cucaracha sprite 2.png')   
+                this.load.image('cucaracha3', 'cucaracha sprite 3.png')   
+
         }
 
         create(){
+
+                // this.cameras.main.setZoom(.34)
 
                 stopVelocity = true
                 dibujaCirculo = true
@@ -153,6 +172,46 @@
                 this.grupoIngredientes.create(1160, 540, "harina").setScale(1.4)
                 this.grupoIngredientes.create(-300, 50, "cebolla").setScale(1.4)
 
+                this.anims.create({
+                        key: 'rataWalk',
+                        frames: [
+                            { key: 'rata1' },
+                            { key: 'rata2' },
+                            { key: 'rata3' },
+                            { key: 'rata4' },
+                            { key: 'rata5' },
+                            { key: 'rata6' },
+                            
+                        ],
+                        frameRate: 15,
+                        repeat: -1
+                })
+            
+                this.anims.create({
+                        key: 'rataAzulWalk',
+                        frames: [
+                            { key: 'rataAzul1' },
+                            { key: 'rataAzul2' },
+                            { key: 'rataAzul3' },
+                            { key: 'rataAzul4' },
+                            
+                        ],
+                        frameRate: 15,
+                        repeat: -1
+                })
+
+                this.anims.create({
+                        key: 'cucarachaWalk',
+                        frames: [
+                            { key: 'cucaracha1' },
+                            { key: 'cucaracha2' },
+                            { key: 'cucaracha3' },
+                            
+                        ],
+                        frameRate: 10,
+                        repeat: -1
+                })
+
                 var corazones = this.add.group({
                         key: 'corazon',
                         repeat: 2,
@@ -164,6 +223,21 @@
                         },
                         setScale: { x: .25, y: .25 }
                 })
+
+                this.ratasYcucarachas = this.physics.add.group()
+                this.rata1 = this.ratasYcucarachas.create(-50, 560, 'rata1').play("rataWalk")
+                this.rata2 = this.ratasYcucarachas.create(850, 558, 'rata1').play("rataWalk")
+                this.rata3 = this.ratasYcucarachas.create(140, 559, 'rataAzul1').play("rataAzulWalk")
+                this.rata4 = this.ratasYcucarachas.create(-600, 480, 'rata1').play("rataWalk")
+                this.rata4.setSize(60, 25).angle = 90
+                this.rata5 = this.ratasYcucarachas.create(460, 255, 'rataAzul1').play("rataAzulWalk")
+                this.rata5.setSize(60, 25).angle = 90
+                this.rata6 = this.ratasYcucarachas.create(-699, 175, 'rataAzul1').play("rataAzulWalk")
+                this.rata6.setSize(60, 25).angle = 90
+                this.cucaracha1 = this.ratasYcucarachas.create(538, 560, 'cucaracha1').play("cucarachaWalk")
+                this.cucaracha2 = this.ratasYcucarachas.create(-588, 560, 'cucaracha1').play("cucarachaWalk")
+                this.cucaracha3 = this.ratasYcucarachas.create(1188, 560, 'cucaracha1').play("cucarachaWalk")
+
 
                 corazones.children.iterate(function (child) {
 
@@ -194,7 +268,6 @@
                 this.pizza.alpha = 0
                 this.pizza.setScrollFactor(0)
 
-                // this.cameras.main.setZoom(.34)
                 this.cameras.main.startFollow(this.pizzaMan)
 
                 this.cameras.main.setBounds(-740, 0, 2275, 600);
