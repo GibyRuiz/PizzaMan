@@ -238,6 +238,96 @@
                 this.cucaracha2 = this.ratasYcucarachas.create(-588, 560, 'cucaracha1').play("cucarachaWalk")
                 this.cucaracha3 = this.ratasYcucarachas.create(1188, 560, 'cucaracha1').play("cucarachaWalk")
 
+                this.tweenRata1 = this.tweens.add({
+                        targets: this.rata1,
+                        duration:4000,
+                        y: 50,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenRata2 = this.tweens.add({
+                        targets: this.rata2,
+                        duration:4000,
+                        y: 50,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenRata3 = this.tweens.add({
+                        targets: this.rata3,
+                        duration:4000,
+                        y: 50,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                        delay: 2200
+                })
+
+                this.tweenRata4 = this.tweens.add({
+                        targets: this.rata4,
+                        duration:10000,
+                        x: 950,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenRata5 = this.tweens.add({
+                        targets: this.rata5,
+                        duration:7000,
+                        x: 1500,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenRata6 = this.tweens.add({
+                        targets: this.rata6,
+                        duration:4000,
+                        x: -30,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenCucaracha1 = this.tweens.add({
+                        targets: this.cucaracha1,
+                        duration:3000,
+                        y: 30,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenCucaracha2 = this.tweens.add({
+                        targets: this.cucaracha2,
+                        duration:2500,
+                        y: 120,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
+                this.tweenCucaracha3 = this.tweens.add({
+                        targets: this.cucaracha3,
+                        duration:2500,
+                        y: 200,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'linear',                
+                                
+                })
+
 
                 corazones.children.iterate(function (child) {
 
@@ -394,6 +484,96 @@
                                 this.graphics.clear();
                                 this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
                         }
+                }
+
+                if(this.rata1.y == 50){
+
+                        this.rata1.flipY = true
+                }
+            
+                else if(this.rata1.y == 560){
+            
+                        this.rata1.flipY = false
+                }
+
+                if(this.rata2.y == 50){
+
+                        this.rata2.flipY = true
+                }
+            
+                else if(this.rata2.y == 558){
+            
+                        this.rata2.flipY = false
+                }
+
+                if(this.rata3.y == 50){
+
+                        this.rata3.flipY = true
+                }
+            
+                else if(this.rata3.y == 559){
+            
+                        this.rata3.flipY = false
+                }
+
+                if(this.rata4.x == 950){
+
+                        this.rata4.flipY = true
+                }
+            
+                else if(this.rata4.x == -600){
+            
+                        this.rata4.flipY = false
+                }
+
+                if(this.rata5.x == 1500){
+
+                        this.rata5.flipY = true
+                }
+            
+                else if(this.rata5.x == 460){
+            
+                        this.rata5.flipY = false
+                }
+
+                if(this.rata6.x == -30){
+
+                        this.rata6.flipY = true
+                }
+            
+                else if(this.rata6.x == -699){
+            
+                        this.rata6.flipY = false
+                }
+
+                if(this.cucaracha1.y == 30){
+
+                        this.cucaracha1.flipY = true
+                }
+            
+                else if(this.cucaracha1.y == 560){
+            
+                        this.cucaracha1.flipY = false
+                }
+
+                if(this.cucaracha2.y == 120){
+
+                        this.cucaracha2.flipY = true
+                }
+            
+                else if(this.cucaracha2.y == 560){
+            
+                        this.cucaracha2.flipY = false
+                }
+
+                if(this.cucaracha3.y == 200){
+
+                        this.cucaracha3.flipY = true
+                }
+            
+                else if(this.cucaracha3.y == 560){
+            
+                        this.cucaracha3.flipY = false
                 }
         }
 }
