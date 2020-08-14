@@ -86,6 +86,7 @@
                 this.load.image('porcion', 'pedazo de pizza .png')
 
                 this.load.audio('yuhu', 'wooHoo.mp3' )
+                this.load.audio('mama', 'mamaMia.mp3' )
 
                 this.load.image('corazon', 'corazon.png')
 
@@ -119,6 +120,10 @@
                 var yuhu = this.sound.add('yuhu')
                 yuhu.detune = 400
                 yuhu.volume = 3
+                var mama = this.sound.add('mama')
+                mama.detune = 1000
+
+                vidas = 3
 
                 this.add.image(0, 0, "piso").setOrigin(0)
                 this.add.image(740, 0, "piso").setOrigin(0)
@@ -404,6 +409,7 @@
                         }
                 })
 
+
                 this.physics.add.overlap(this.pizzaMan, this.grupoIngredientes, (player, ing) => {
 
                         yuhu.play()
@@ -432,7 +438,61 @@
 
                         }, 1)} )
 
+                var pizzaMan = this.pizzaMan
+
+                this.physics.add.overlap(this.pizzaMan, this.ratasYcucarachas, chocaRatasYCucarachas)
+
+                function chocaRatasYCucarachas(){
+                        
+                        if(controlaAlfa){                
+                               
+                            controlaAlfa = false
+            
+                            if(vidas > 0){
+                                
+                                mama.play()
+            
+                            setTimeout(() => {
+                                pizzaMan.setAlpha(0.4)
+                                pizzaMan.setTint(0xff0000)
+                            }, 150)
+                            
+                            setTimeout(() => {
+                                pizzaMan.setAlpha(1)
+                                pizzaMan.clearTint()
+                            }, 250)
+            
+                            setTimeout(() => {
+                                pizzaMan.setAlpha(0.4)
+                                pizzaMan.setTint(0xff0000)
+                            }, 350)
+            
+                            setTimeout(() => {
+                                pizzaMan.setAlpha(1)
+                                pizzaMan.clearTint()
+                            }, 450)
+                        }
+            
+                        setTimeout(() => {
+                           
+                           vidas--
+            
+                           if(vidas > -1){
+                                var arrCorazones = corazones.getChildren()[corazones.getChildren().length -1]
+            
+                                if(arrCorazones !== undefined){
+                                arrCorazones.destroy()
+                                }
+                           }
+            
+                           controlaAlfa = true
+                        }, 750)
+                    }
+            
+                }   
+            
         }
+
 
         update(){
 
