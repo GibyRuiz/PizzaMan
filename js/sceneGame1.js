@@ -1,4 +1,4 @@
-// Escena del juego:
+// Escena 1:
 
 class SceneGame extends Phaser.Scene {
 
@@ -70,8 +70,10 @@ class SceneGame extends Phaser.Scene {
         vidas = 3
         // playMusic = true
         iniciaGameOver = true
+        lanzaEscena2 = true
         puntos = 0
         dibujaCirculo = true
+        incrementoTamañoPizza = .1
 
         // Adición de sonidos:
         var mama = this.sound.add('mama')
@@ -184,16 +186,13 @@ class SceneGame extends Phaser.Scene {
         this.pizzaMan = this.physics.add.sprite(50, 300, 'pizzaMan1').setCollideWorldBounds(true)
         this.pizzaMan.setCircle(17, 12, 15)  
 
+        //Carga de la porción de pizza 
         this.porcionPizza = this.add.image(680, 57, "porcion").setScale(.12)
         this.porcionPizza.alpha = 0
 
+        //Carga de la pizza
         this.pizza = this.add.image(400, 300, "pizza").setScale(.1)
         this.pizza.alpha = 0
-        
-        // Carga y configuración del texto de puntaje:
-        // var textScore = this.add.text(607, 63, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
-        // textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
-
 
         // Animación del pizzaMan:
         this.anims.create({
@@ -319,8 +318,6 @@ class SceneGame extends Phaser.Scene {
 
             }, 1)
 
-            // puntos++
-            // textScore.setText("SCORE: " + puntos)
             yuhu.play()
             } )
 
@@ -366,6 +363,10 @@ class SceneGame extends Phaser.Scene {
             }
 
             setTimeout(() => {
+                controlaAlfa = true
+            }, 750)
+
+            setTimeout(() => {
                
                vidas--
 
@@ -378,8 +379,7 @@ class SceneGame extends Phaser.Scene {
                     }
                }
 
-               controlaAlfa = true
-            }, 750)
+            }, 250)
         }
 
     }   
@@ -421,24 +421,19 @@ class SceneGame extends Phaser.Scene {
             this.noo.volume = 2
             this.noo.play()
 
-            // Se prepara el puntaje que va a aparecer en la escena de game over como "best":
-            if(puntos > puntajeGlobal){
-
-            puntajeGlobal = puntos }
-
             // Se dispara la escena de game over:
-            var escena = this.scene
+            // var escena = this.scene
             
             setTimeout(() => {
 
                 if(startGameOver){
                 
-                escena.add("JuegoTerminado", new JuegoTerminado)
+                this.scene.add("JuegoTerminado", new JuegoTerminado)
                 startGameOver = false
                 }
 
                 if(iniciaGameOver){
-                    escena.start("JuegoTerminado")
+                    this.scene.start("JuegoTerminado")
                     iniciaGameOver = false
                 }
                 
@@ -457,18 +452,20 @@ class SceneGame extends Phaser.Scene {
 
                 this.pizza.setScale(incrementoTamañoPizza += .02)
             }
-        //     this.tweenRata1.timeScale +=.2
-        //     this.tweenRata2.timeScale +=.2
-        //     this.tweenRata3.timeScale +=.2
-        //     this.tweenRata4.timeScale +=.2
-        //     this.tweenRata5.timeScale +=.2
 
-            // Vuelven a aparecer los ingredientes una vez que se juntaron todos:
-            // this.grupoIngredientes.children.iterate(function (child) {
-
-            //     child.enableBody(true, child.x, child.y, true, true)
+            setTimeout(() => {
+                if(instanciaEscena2){
+                            
+                    this.scene.add("SegundoNivel", new SegundoNivel)
+                    instanciaEscena2 = false
+                    }
     
-            // })
+                    if(lanzaEscena2){
+                        this.scene.start("SegundoNivel")
+                        lanzaEscena2 = false
+                    }
+
+            }, 2000)
         }
 
         // Variable "stopVelocity" que controla que no se ejecute más el código que no se necesita al perder:

@@ -1,44 +1,5 @@
-// Dejo preparado la configuración de la cámara para armar el segundo nivel:
-
-        // Zoom:
-        // this.cameras.main.setZoom(valor);
-
-        // La cámara sigue al personaje:
-        // this.cameras.main.startFollow(personaje, true, delay X, delay Y);
-
-        // La cámara se puede desplazar hasta el punto límite indicado:
-        // this.cameras.main.setBounds(origenX, origenY, finalX, finalY);
-
-        // Se ammplían los límites colisionables del juego:
-        // this.physics.world.setBounds(origenX, origenY, finalX, finalY);
-
-        // SetScrollFactor:
-        // Hace que el texto se fije a la cámara. Sirve para otros assets.
-        // text = this.add.text(origenX, origenY).setText('text').setScrollFactor(0);
-
-        // Dead zone:
-        // La zona muerta toma un rectángulo que tiene como centro el punto central de la cámara. 
-        // Permite que el objetivo se mueva libremente por la zona sin que la cámara lo siga.
-        // this.cameras.main.setDeadzone(tamaño en x, tamaño en y);
-
-        // Viewport (tamaño y posición de la cámara):
-        // this.cameras.main.setViewport(origenX, origenY, ancho, alto);
-
         // Guardar la cámara en una variable:
         // var cam = this.cameras.main;
-        // Hacer más chica la cámara y por lo tanto la visión de la escena:
-        // cam.setViewport(origenX, origenY, ancho, alto);
-        // Otra fomra de hacer zoom:
-        // cam.zoom = valor;
-        // Hacer scroll:
-        // cam.scrollX = valor;
-        // cam.scrollY = valor;
-
-        // Agregar mas cámaras:
-        // this.cameras.add(origenX, origenY, tamañoX, tamañoY);
-
-        // Sacudir:
-        // cam.shake(duración en ms, intensidad); <= Se puede colocar en el update sin condicional
 
         // Hacer que la imágen aparezca como si fuera que se le sube el alfa y que dispare como un flash:
         // cam.flash(duración en ms); <= Se puede colocar en el update sin condicional
@@ -83,7 +44,6 @@
                 this.load.image('lata', 'lata.png')
                 this.load.image('queso', 'queso.png')
                 this.load.image('tomate', 'tomate.png')
-                this.load.image('porcion', 'pedazo de pizza .png')
 
                 this.load.audio('yuhu', 'wooHoo.mp3' )
                 this.load.audio('mama', 'mamaMia.mp3' )
@@ -91,6 +51,7 @@
                 this.load.image('corazon', 'corazon.png')
 
                 this.load.image('pizza', 'pizza completa.png')
+                this.load.image('porcion', 'pedazo de pizza .png')
 
                 this.load.image('rata1', 'Rata sprite 1.png')
                 this.load.image('rata2', 'Rata sprite 2.png') 
@@ -117,11 +78,15 @@
                 stopVelocity = true
                 dibujaCirculo = true
 
+                iniciaGameOver = true
+
                 var yuhu = this.sound.add('yuhu')
                 yuhu.detune = 400
                 yuhu.volume = 3
                 var mama = this.sound.add('mama')
                 mama.detune = 1000
+
+                incrementoTamañoPizza = .1
 
                 vidas = 3
 
@@ -472,6 +437,10 @@
                                 pizzaMan.clearTint()
                             }, 450)
                         }
+
+                        setTimeout(() => {
+                                controlaAlfa = true
+                            }, 750)
             
                         setTimeout(() => {
                            
@@ -485,8 +454,7 @@
                                 }
                            }
             
-                           controlaAlfa = true
-                        }, 750)
+                        }, 250)
                     }
             
                 }   
@@ -523,6 +491,38 @@
                         this.graphics.fillTriangleShape(this.triangleRight)
                         this.graphics.fillTriangleShape(this.triangleLeft)
 
+                }
+
+                if(vidas == 0){
+            
+                        stopVelocity = false
+                        this.pizzaMan.setVelocity(0,0)
+                        this.pizzaMan.angle += 30
+                        this.pizzaMan.setScale(1.5)
+                        this.pizzaMan.setCircle(5, 30, 30)
+                        this.pizzaMan.alpha = 1
+                        // this.noo.detune = 400
+                        // this.noo.volume = 2
+                        // this.noo.play()
+            
+                        // Se dispara la escena de game over:
+                        var escena = this.scene
+                        
+                        setTimeout(() => {
+            
+                            if(startGameOver){
+                            
+                            escena.add("JuegoTerminado", new JuegoTerminado)
+                            startGameOver = false
+                            }
+            
+                            if(iniciaGameOver){
+                                escena.start("JuegoTerminado")
+                                iniciaGameOver = false
+                            }
+                            
+                        }, 1000)
+            
                 }
 
 
