@@ -18,22 +18,6 @@ class JuegoTerminado extends Phaser.Scene {
         // Carga de backgroun:
         this.imgGameOver = this.add.sprite(400, -400, "finishGame").setScale(.5)
 
-        // Configuración del texto del puntaje final:
-        // var textScore = this.add.text(320, 210, 'SCORE: 0', {font: "27px Arial Black", fill: '#af0000' })
-        // textScore.setShadow(-1, 2, "#ff00ff", 4, true, true)
-
-        // Intervalo que se encarga de actualizar el contador del puntaje:
-        // var puntajeFinal = 0
-
-        // var intervaloBestScore = setInterval(() => {
-           
-        //     textScore.setText("SCORE: " + puntajeFinal + "\nBEST: " + puntajeGlobal)
-        //     puntajeFinal++
-        //     if(puntajeFinal == puntos + 1){
-        //         clearInterval(intervaloBestScore)
-        //     }
-        // },50)
-
         // Tween para que el background carge de arriba hacia abajo con rebote:
         this.tweens.add({
             targets: this.imgGameOver,
@@ -67,6 +51,6 @@ class JuegoTerminado extends Phaser.Scene {
         setTimeout(() => {
             
             escena.start("Menu")
-        }, 8000)
+        }, 4000)
     }
 }

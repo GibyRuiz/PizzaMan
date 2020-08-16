@@ -47,6 +47,7 @@
 
                 this.load.audio('yuhu', 'wooHoo.mp3' )
                 this.load.audio('mama', 'mamaMia.mp3' )
+                this.load.audio('nooo', 'nooo.mp3' )
 
                 this.load.image('corazon', 'corazon.png')
 
@@ -85,14 +86,17 @@
                 yuhu.volume = 3
                 var mama = this.sound.add('mama')
                 mama.detune = 1000
+                this.noo = this.sound.add('nooo')
 
                 incrementoTamañoPizza = .1
 
                 vidas = 3
 
                 this.add.image(0, 0, "piso").setOrigin(0)
-                this.add.image(740, 0, "piso").setOrigin(0)
-                this.add.image(-740, 0, "piso").setOrigin(0)
+                this.add.image(663, 0, "piso").setOrigin(0)
+                this.add.image(-663, 0, "piso").setOrigin(0)
+                this.add.image(1326, 0, "piso").setOrigin(0)
+                this.add.image(-1326, 0, "piso").setOrigin(0)
 
                 this.grupoCocina = this.physics.add.staticGroup()
                 this.grupoCocina.create(700, 50, 'mesa3')
@@ -501,9 +505,9 @@
                         this.pizzaMan.setScale(1.5)
                         this.pizzaMan.setCircle(5, 30, 30)
                         this.pizzaMan.alpha = 1
-                        // this.noo.detune = 400
-                        // this.noo.volume = 2
-                        // this.noo.play()
+                        this.noo.detune = 400
+                        this.noo.volume = 2
+                        this.noo.play()
             
                         // Se dispara la escena de game over:
                         var escena = this.scene
