@@ -75,6 +75,8 @@ class SceneGame extends Phaser.Scene {
         dibujaCirculo = true
         incrementoTamañoPizza = .1
 
+        this.cameras.main.flash(2000)
+
         // Adición de sonidos:
         var mama = this.sound.add('mama')
         var yuhu = this.sound.add('yuhu')
@@ -460,8 +462,6 @@ class SceneGame extends Phaser.Scene {
             }
 
             
-            
-
             setTimeout(() => {
                 if(instanciaEscena2){
                             

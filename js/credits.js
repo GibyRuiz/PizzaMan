@@ -33,6 +33,8 @@ class Creditos extends Phaser.Scene {
 
     create(){
 
+        this.cameras.main.flash(2000)
+
         // Carga de imágenes:
         this.add.image(0, 0, "piso").setOrigin(0).setTint(0xff2d00)
         this.add.image(665, 0, "piso").setOrigin(0).setTint(0xff2d00)
