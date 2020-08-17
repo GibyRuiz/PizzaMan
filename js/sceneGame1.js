@@ -451,7 +451,16 @@ class SceneGame extends Phaser.Scene {
             if(incrementoTamañoPizza <= .7){
 
                 this.pizza.setScale(incrementoTamañoPizza += .02)
+
+                setTimeout(() => {
+
+                    this.cameras.main.fade(2000)
+                },3000)
+                
             }
+
+            
+            
 
             setTimeout(() => {
                 if(instanciaEscena2){
@@ -465,7 +474,7 @@ class SceneGame extends Phaser.Scene {
                         lanzaEscena2 = false
                     }
 
-            }, 2000)
+            }, 5000)
         }
 
         // Variable "stopVelocity" que controla que no se ejecute más el código que no se necesita al perder:

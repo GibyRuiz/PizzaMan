@@ -44,3 +44,4 @@ var angle = 0
 var dibujaCirculo = true
 var incrementoTamañoPorcion = 0.12
 var incrementoTamañoPizza = .1
+var volverMenu

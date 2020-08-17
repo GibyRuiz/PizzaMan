@@ -75,6 +75,7 @@
         create(){
 
                 // this.cameras.main.setZoom(.34)
+                this.cameras.main.flash(3000)
 
                 stopVelocity = true
                 dibujaCirculo = true
@@ -91,6 +92,8 @@
                 incrementoTamañoPizza = .1
 
                 vidas = 3
+
+                volverMenu = true
 
                 this.add.image(0, 0, "piso").setOrigin(0)
                 this.add.image(663, 0, "piso").setOrigin(0)
@@ -477,6 +480,20 @@
                         if(incrementoTamañoPizza <= .7){
             
                             this.pizza.setScale(incrementoTamañoPizza += .02)
+
+                            setTimeout(() => {
+
+                                this.cameras.main.fade(2000)
+                            },3000)
+                        }
+
+                        if(volverMenu){
+
+                                volverMenu = false
+                                setTimeout(() => {
+            
+                                        this.scene.start("Menu")
+                                }, 5000)
                         }
                 }
 
