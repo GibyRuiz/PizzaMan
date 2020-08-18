@@ -95,6 +95,8 @@
 
                 volverMenu = true
 
+                detieneJuego = true
+
                 this.add.image(0, 0, "piso").setOrigin(0)
                 this.add.image(663, 0, "piso").setOrigin(0)
                 this.add.image(-663, 0, "piso").setOrigin(0)
@@ -415,6 +417,8 @@
                 this.physics.add.overlap(this.pizzaMan, this.ratasYcucarachas, chocaRatasYCucarachas)
 
                 function chocaRatasYCucarachas(){
+
+                        if(detieneJuego){
                         
                         if(controlaAlfa){                
                                
@@ -465,6 +469,8 @@
                     }
             
                 }   
+
+           }
             
         }
 
@@ -474,6 +480,8 @@
                 this.pizzaMan.setVelocity(0)
 
                 if (this.grupoIngredientes.countActive(true) === 0){
+
+                        detieneJuego = false
 
                         this.pizza.alpha = 1
             

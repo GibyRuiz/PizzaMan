@@ -74,6 +74,7 @@ class SceneGame extends Phaser.Scene {
         puntos = 0
         dibujaCirculo = true
         incrementoTamañoPizza = .1
+        detieneJuego = true
 
         this.cameras.main.flash(2000)
 
@@ -333,7 +334,8 @@ class SceneGame extends Phaser.Scene {
             
             // La variable "controlaAlfa" controla que no se ejecute denuevo el código de la función hasta que no haya
             // terminado de ejecutarse por completo
-            
+            if(detieneJuego){
+
             if(controlaAlfa){                
                    
                 controlaAlfa = false
@@ -384,7 +386,9 @@ class SceneGame extends Phaser.Scene {
             }, 250)
         }
 
-    }   
+    }
+    
+    }
 
 }
     
@@ -447,6 +451,8 @@ class SceneGame extends Phaser.Scene {
         this.pizzaMan.setVelocity(0)
 
         if (this.grupoIngredientes.countActive(true) === 0){
+
+            detieneJuego = false
 
             this.pizza.alpha = 1
 
