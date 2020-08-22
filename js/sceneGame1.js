@@ -68,15 +68,13 @@ class SceneGame extends Phaser.Scene {
         // Variables que recuperan los valores que necesitan al inicio de la escena:
         stopVelocity = true
         vidas = 3
-        // playMusic = true
         iniciaGameOver = true
         lanzaEscena2 = true
-        puntos = 0
         dibujaCirculo = true
         incrementoTamañoPizza = .1
         detieneJuego = true
 
-        this.cameras.main.flash(2000)
+        this.cameras.main.flash(500)
 
         // Adición de sonidos:
         var mama = this.sound.add('mama')
@@ -88,8 +86,6 @@ class SceneGame extends Phaser.Scene {
         yuhu.volume = 3
         mama.detune = 1000
         this.mama = mama
-        // music.detune = 200
-        // this.sound.pauseOnBlur = false
         
         this.add.image(0, 0, "piso").setOrigin(0)
         this.add.image(665, 0, "piso").setOrigin(0)
@@ -428,7 +424,6 @@ class SceneGame extends Phaser.Scene {
             this.noo.play()
 
             // Se dispara la escena de game over:
-            // var escena = this.scene
             
             setTimeout(() => {
 
@@ -506,17 +501,6 @@ class SceneGame extends Phaser.Scene {
                 // Fórmula para calcular el vector de dirección del pizzaMan:
                 this.pizzaMan.setVelocity(Math.cos((this.pizzaMan.angle * Math.PI)/180) * 300, Math.sin((this.pizzaMan.angle * Math.PI)/180) * 300)
 
-                // Variable "playMusic" para controlar que la música se reproduzca una sola vez.
-                // La música se activa solo cuando se aprieta el cursor UP. Tuve que forzarla de esa manera
-                // porque no arrancaba siempre que cargaba la escena. Hay un bug con la música que todavía no pude
-                // solucionar y lo hace cuando, estando en la escena de game over, minimizamos o cambiamos la ventana
-                // del navegador por unos segundos y al volver a la ventana del juego la música sigue sonando en vez de parar
-                // al cargar la escena del menú, lo que hace que se pisen las pistas al cargar la escena del juego.
-                // if(playMusic){
-
-                //     music.play()
-                //     playMusic = false
-                // }
             }
 
         }

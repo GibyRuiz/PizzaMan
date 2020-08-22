@@ -46,11 +46,10 @@ class JuegoTerminado extends Phaser.Scene {
         // })
 
         // Función que carga el menú principal después de unos segundos:
-        var escena = this.scene
 
         setTimeout(() => {
             
-            escena.start("Menu")
+            this.scene.start("Menu")
         }, 4000)
     }
 }

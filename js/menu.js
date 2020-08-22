@@ -16,14 +16,18 @@ class Menu extends Phaser.Scene {
         this.load.image("play", "botonPlay.png")
         this.load.image("bgCredits", "backgroundCreditos.png")
         this.load.image("textCredits", "creditos.png")
-        // this.load.audio("tarantela", "tarantela.mp3" )
+        this.load.audio("tarantela", "tarantela.mp3" )
     }
 
     create(){
 
-        // Asignación de la música a la variable global "music":
-        // this.music = this.sound.add("tarantela", {loop: true});
-        // music = this.music
+        if(playMusic){
+        this.music = this.sound.add("tarantela", {loop: true})
+        // this.music.detune = 100
+        // this.sound.pauseOnBlur = false
+        this.music.play()
+        playMusic = false
+        }
 
         // Carga de imágenes:
         this.portada = this.add.image(1400, 300, "portada").setScale(.5)
