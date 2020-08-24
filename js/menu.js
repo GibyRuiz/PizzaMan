@@ -21,14 +21,6 @@ class Menu extends Phaser.Scene {
 
     create(){
 
-        if(playMusic){
-        this.music = this.sound.add("tarantela", {loop: true})
-        // this.music.detune = 100
-        // this.sound.pauseOnBlur = false
-        this.music.play()
-        playMusic = false
-        }
-
         // Carga de imágenes:
         this.portada = this.add.image(1400, 300, "portada").setScale(.5)
         this.botonPlay = this.add.image(-100, 490, "play").setScale(.5)
@@ -162,6 +154,13 @@ class Menu extends Phaser.Scene {
         if(cambiaEscena){
             if(startGame){
             this.scene.add("SceneGame", new SceneGame)
+            if(playMusic){
+                this.music = this.sound.add("tarantela", {loop: true})
+                // this.music.detune = 100
+                // this.sound.pauseOnBlur = false
+                this.music.play()
+                playMusic = false
+                }
             startGame = false
         }
             this.scene.start("SceneGame")
