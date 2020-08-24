@@ -75,7 +75,7 @@
         create(){
 
                 // this.cameras.main.setZoom(.34)
-                this.cameras.main.flash(3000)
+                this.cameras.main.flash(1500)
 
                 stopVelocity = true
                 dibujaCirculo = true
