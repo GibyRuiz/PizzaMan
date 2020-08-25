@@ -1,15 +1,4 @@
-        // Guardar la cámara en una variable:
-        // var cam = this.cameras.main;
-
-        // Hacer que la imágen aparezca como si fuera que se le sube el alfa y que dispare como un flash:
-        // cam.flash(duración en ms); <= Se puede colocar en el update sin condicional
-        // Lo que ocurre es que al principio la imagen carga con la información de los pixeles al máximo y se ve blanca
-        // cam.flash(duración en ms, 1, 1, 1); <= con los valores 1 se controla el color del flash.
-
-        // Hacer que la imágen desaparezca como si fuera que se le baja el alfa:
-        // cam.fade(duración en ms);
-
- class SegundoNivel extends Phaser.Scene {
+class SegundoNivel extends Phaser.Scene {
 
        constructor()
         {
@@ -19,52 +8,6 @@
         preload(){
 
                 this.load.image('piso', 'piso.png')
-                this.load.image('horno', 'horno1.png')  
-                this.load.image('hornoMesa', 'hornoymesa2.png')  
-                this.load.image('mesa1', 'mesa1.png') 
-                this.load.image('mesa2', 'mesa2.png')   
-                this.load.image('mesa3', 'mesa3.png')  
-                this.load.image('mesa4', 'mesa4.png')  
-                this.load.image('mesaGrande', 'mesagrande.png')   
-                this.load.image('mesaMadera1', 'mesamadera1.png')   
-                this.load.image('mesaMadera2', 'mesamadera2.png') 
-
-                this.load.image('pizzaMan1', 'Sprite-1.png')
-                this.load.image('pizzaMan2', 'Sprite-2.png')
-                this.load.image('pizzaMan3', 'Sprite-3.png')
-                this.load.image('pizzaMan4', 'Sprite-4.png')
-                this.load.image('pizzaMan5', 'Sprite-5.png')
-                this.load.image('pizzaMan6', 'Sprite-6.png')
-                this.load.image('pizzaMan7', 'Sprite-7.png')
-                this.load.image('pizzaMan8', 'Sprite-8.png')
-
-                this.load.image('ajo', 'ajo.png')
-                this.load.image('cebolla', 'cebolla.png')
-                this.load.image('harina', 'harina.png')
-                this.load.image('lata', 'lata.png')
-                this.load.image('queso', 'queso.png')
-                this.load.image('tomate', 'tomate.png')
-
-                this.load.audio('yuhu', 'wooHoo.mp3' )
-                this.load.audio('mama', 'mamaMia.mp3' )
-                this.load.audio('nooo', 'nooo.mp3' )
-
-                this.load.image('corazon', 'corazon.png')
-
-                this.load.image('pizza', 'pizza completa.png')
-                this.load.image('porcion', 'pedazo de pizza .png')
-
-                this.load.image('rata1', 'Rata sprite 1.png')
-                this.load.image('rata2', 'Rata sprite 2.png') 
-                this.load.image('rata3', 'Rata sprite 3.png')  
-                this.load.image('rata4', 'Rata sprite 4.png')   
-                this.load.image('rata5', 'Rata sprite 5.png')   
-                this.load.image('rata6', 'Rata sprite 6.png')   
-
-                this.load.image('rataAzul1', 'rata sprite azul 1 png.png')
-                this.load.image('rataAzul2', 'rata sprite azul 2 png.png') 
-                this.load.image('rataAzul3', 'rata sprite azul 3 png.png')  
-                this.load.image('rataAzul4', 'rata sprite azul 4 png.png') 
 
                 this.load.image('cucaracha1', 'cucaracha sprite 1.png')   
                 this.load.image('cucaracha2', 'cucaracha sprite 2.png')   

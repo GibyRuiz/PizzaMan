@@ -27,24 +27,6 @@ class JuegoTerminado extends Phaser.Scene {
             ease: "Bounce"
         })
 
-        // Tween para que la música disminuya la escala tonal cuando arranca la escena:
-        // this.tweens.add({
-        //     targets: music,
-        //     detune:100,
-        //     duration: 2000,
-        //     delay: 0,
-        //     ease: "Linear"
-        // })
-
-        // Tween para que la música disminuya el volumen al final:
-        // this.tweens.add({
-        //     targets: music,
-        //     volume:0,
-        //     duration: 4000,
-        //     delay: 3000,
-        //     ease: "Power1"
-        // })
-
         // Función que carga el menú principal después de unos segundos:
 
         setTimeout(() => {
